@@ -12,7 +12,8 @@ var config = require('../config');
 
 const dll = [
     'vue',
-    'vue-router'
+    'vue-router',
+    'element-ui'
 ];
 
 function resolve(dir) {
