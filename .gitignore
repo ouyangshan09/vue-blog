@@ -3,5 +3,7 @@ node_modules/
 dist/
 test/unit/
 test/e2e/
+.idea/
+lib/
 #git上传时，过滤文件名
 npm-debug.log

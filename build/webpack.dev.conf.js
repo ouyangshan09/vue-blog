@@ -20,12 +20,13 @@ module.exports = merge(baseWebpackConfig, {
     module: {
         rules: utils.styleLoaders({sourceMap: config.dev.cssSourceMap})
     },
-    devServer: {
-        hot: true,
-        inline: true,
-        contentBase: path.join(__dirname, "../"),
-        port: 9999
-    },
+    //使用dev-server.js替代
+    // devServer: {
+    //     hot: true,
+    //     inline: true,
+    //     contentBase: path.join(__dirname, "../"),
+    //     port: 9999
+    // },
     devtool: '#cheap-module-eval-source-map',
     plugins: [
         new DefinePlugin({
