@@ -10,6 +10,7 @@ import App from './App';
 import Router from './router';
 import Store from './store';
 import 'element-ui/lib/theme-default/index.css';
+import './assets/css/index.scss';
 
 Vue.use(ElementUI);
 
