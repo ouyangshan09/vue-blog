@@ -8,7 +8,10 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Hello from '../component/Hello';
 import Client from '../client/client.vue';
+import Login from '../server/Login.vue';
+import Manager from '../server/Manager.vue';
 import Home from '../client/home.vue';
+import NotFound from '../component/NotFound.vue';
 
 Vue.use(Router);
 
@@ -23,9 +26,24 @@ export default new Router({
                 {path: '', redirect: 'home'},
                 {path: 'home', component: Home},
             ]
-        }
-        //客户端管理路由
-
+        },
+        //后台管理登录路由
+        {
+            path: '/login',
+            name: 'Login',
+            component: Login
+        },
+        //后台管理界面项路由
+        {
+            path: '/manager',
+            name: 'Manager',
+            component: Manager
+        },
         //无路由组件
+        {
+            path: '*',
+            name: 'NotFound',
+            component: NotFound
+        }
     ]
 });

@@ -14,6 +14,7 @@ import './assets/css/index.scss';
 
 Vue.use(ElementUI);
 
+
 new Vue({
     el: '#app',
     router: Router,
