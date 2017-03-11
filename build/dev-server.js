@@ -1,11 +1,11 @@
 /**
  * Created by OUYANG on 2017/2/27.
  */
+require('./check-versions')();
 var path = require('path');
 var opn = require('opn');
 var express = require('express');
 var webpack = require('webpack');
-var merge = require('webpack-merge');
 var config = require('../config');
 var baseWebpackConfig = require('./webpack.dev.conf');
 var proxyMiddleware = require('http-proxy-middleware');
@@ -20,16 +20,16 @@ var autoOpenBrowser = !!config.dev.autoOpenBrowser;
 var proxyTable = config.dev.proxyTable;
 
 var app = express();
-var compilre = webpack(baseWebpackConfig);
+var compiler = webpack(baseWebpackConfig);
 
-var devMiddleware = require('webpack-dev-middleware')(compilre, {
+var devMiddleware = require('webpack-dev-middleware')(compiler, {
     publicPath: baseWebpackConfig.output.publicPath,
     quiet: true
 });
-var hotMiddleware = require('webpack-hot-middleware')(compilre, {
+var hotMiddleware = require('webpack-hot-middleware')(compiler, {
     log: () => {}
 });
-compilre.plugin('compilation', function (compilation) {
+compiler.plugin('compilation', function (compilation) {
     compilation.plugin('html-webpack-plugin-after-emit', function (data, cb) {
         hotMiddleware.publish({ action: 'reload' });
         cb();

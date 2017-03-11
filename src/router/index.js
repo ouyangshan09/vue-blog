@@ -16,6 +16,7 @@ import NotFound from '../component/NotFound.vue';
 Vue.use(Router);
 
 export default new Router({
+    // mode:'history',
     routes: [
         //客户端路由访问
         {

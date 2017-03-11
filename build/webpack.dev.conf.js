@@ -16,6 +16,10 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 var FriendlyErrorPlugin = require('friendly-errors-webpack-plugin');
 
+Object.keys(baseWebpackConfig.entry).forEach(function (name) {
+    baseWebpackConfig.entry[name] = ['./build/dev-client'].concat(baseWebpackConfig.entry[name]);
+});
+
 module.exports = merge(baseWebpackConfig, {
     module: {
         rules: utils.styleLoaders({sourceMap: config.dev.cssSourceMap})
@@ -40,13 +44,13 @@ module.exports = merge(baseWebpackConfig, {
             inject: true
         }),
         new FriendlyErrorPlugin(),
-        new DllReferencePlugin({
-            context: config.build.assetsLib,
-            manifest: config.build.assetsLib + '/manifest.json'
-        }),
-        new AddAssetHtmlPlugin({
-            filepath: require.resolve('../lib/lib.js'),
-            includeSourcemap: false
-        })
+        // new DllReferencePlugin({
+        //     context: config.build.assetsLib,
+        //     manifest: config.build.assetsLib + '/manifest.json'
+        // }),
+        // new AddAssetHtmlPlugin({
+        //     filepath: require.resolve('../lib/lib.js'),
+        //     includeSourcemap: false
+        // })
     ],
 });
