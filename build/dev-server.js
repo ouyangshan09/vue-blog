@@ -50,7 +50,8 @@ app.use(hotMiddleware);
 var staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory);
 app.use(staticPath, express.static('./static'));
 
-var uri = 'http://localhost:' + port;
+// var uri = 'http://localhost:' + port;
+var uri = 'http://www.kpie.com.cn:' + port;
 
 devMiddleware.waitUntilValid(function () {
     console.log('> Listenign at ' + uri + '\n');
