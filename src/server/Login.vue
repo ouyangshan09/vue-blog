@@ -20,7 +20,7 @@
     </div>
 </template>
 <script type="es6">
-    import VueEntity from '../base/vueEntity';
+    // import {BooleanUtils, NumberUtils, ObjectUtils, DataType} from '../utils';
 
     export default {
         data(){
