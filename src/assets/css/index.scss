@@ -7,13 +7,19 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
   height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 0;
+  margin: 0;
 }
 //外部通用样式
 .container{
-  position: relative;
+  position: absolute;
   margin: 0;
   padding: 0;
   width: 100%;
+  height: 100%;
 }

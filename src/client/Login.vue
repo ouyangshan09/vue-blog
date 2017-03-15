@@ -3,10 +3,14 @@
         <el-form class="login-form" :model="user" :rules="rules" ref="userForm" v-loading="loadObj.loading" :element-loading-text="loadObj.loadingText">
             <h3 class="title">欢迎登录后台管理系统</h3>
             <el-form-item prop="account">
-                <el-input type="text" v-model="user.account" placeholder="帐号"></el-input>
+                <el-input type="text" v-model="user.account" placeholder="帐号">
+                    <template slot="prepend">账号</template>
+                </el-input>
             </el-form-item>
             <el-form-item prop="password">
-                <el-input type="password" v-model="user.password" placeholder="密码"></el-input>
+                <el-input type="password" v-model="user.password" placeholder="密码">
+                    <template slot="prepend">密码</template>
+                </el-input>
             </el-form-item>
             <el-form-item>
                 <el-button type="primary" @click="toManager">登录</el-button>
@@ -30,7 +34,6 @@
                     loadingText: '页面跳转中',
                     loadingflag: false,
                 },
-                loading: false,
                 user: {
                     account: '',
                     password: ''
@@ -54,7 +57,7 @@
         },
         methods: {
             toRegister(){
-                // this.$router.push({ path: '/register'});
+                this.$router.push({ path: '/register'});
             },
             toManager(){
                 const userObj = {
@@ -62,9 +65,13 @@
                     password: this.user.password
                 }
                 this.$refs['userForm'].validate(value => {
-                    console.log("12312");
                     if(value){
-                        console.log('success: ', value);
+                        this.$http.post('/api/login', {
+                            user: userObj
+                        }).then(res => {
+                            console.log('client login: ', res);
+                        });
+                        console.log('success: ', userObj);
                     }else {
                         console.log('error submit');
                         return false;

@@ -8,8 +8,9 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Hello from '../component/Hello';
 import Client from '../client/client.vue';
-import Login from '../server/Login.vue';
-import Manager from '../server/Manager.vue';
+import Login from '../client/Login.vue';
+import Register from '../client/Register.vue';
+import Manager from '../client/Manager.vue';
 import Home from '../client/home.vue';
 import NotFound from '../component/NotFound.vue';
 
@@ -33,6 +34,12 @@ export default new Router({
             path: '/login',
             name: 'Login',
             component: Login
+        },
+        //后台管理注册用户路由
+        {
+            path: '/register',
+            name: 'Register',
+            component: Register
         },
         //后台管理界面项路由
         {
