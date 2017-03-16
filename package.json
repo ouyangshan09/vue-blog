@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "webpack-dev-server --config ./build/webpack.dev.conf.js -d",
     "dev-hot": "node build/dev-server.js",
-    "service": "supervisor ./server/app.js",
+    "service": "node ./server/app.js",
+    "service-hot": "supervisor ./server/app.js",
     "build": "node build/build.js",
     "bundle": "webpack --progress --colors --config ./build/webpack.dll.conf.js",
     "bundle2": "node build/dll-bundle.js"

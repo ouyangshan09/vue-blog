@@ -18,12 +18,15 @@ router.get('/testLogin', (request, response, next) => {
     response.send(user);
 });
 router.post('/login', (request, response, next) => {
-    // const account = request.body.user.account;
-    // const password = response.body.user.password;
+    const account = request.body.user.account;
+    const password = request.body.user.password;
+    // let account = request.body.user.account;
+    // let password = request.body.user.password;
     // User.insertOne({account: account, password: password}).exec().then(value => {
     //     console.log('insertOne value: ', value);
     // });
-    console.log('login request: ', request.body.user.password);
+    // console.log('login request body: ', request.body);
+    console.log('login request: ', `account: ${account} - password: ${password}`);
     // console.log('User Module: ', User);
     response.send('login');
 });
