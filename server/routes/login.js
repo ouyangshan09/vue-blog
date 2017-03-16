@@ -5,6 +5,7 @@
  */
 var express = require('express');
 var router = express.Router();
+var User = require('../entity/User');
 
 router.get('/testLogin', (request, response, next) => {
 
@@ -17,9 +18,13 @@ router.get('/testLogin', (request, response, next) => {
     response.send(user);
 });
 router.post('/login', (request, response, next) => {
-    // const account = request.body.account;
-    // const password = response.body.password;
-    console.log('login request: ', request.body);
+    // const account = request.body.user.account;
+    // const password = response.body.user.password;
+    // User.insertOne({account: account, password: password}).exec().then(value => {
+    //     console.log('insertOne value: ', value);
+    // });
+    console.log('login request: ', request.body.user.password);
+    // console.log('User Module: ', User);
     response.send('login');
 });
 

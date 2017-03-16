@@ -6,7 +6,9 @@
  */
 var db = require('../db/baseApi');
 
-module.exports = db.model('User', {
+var User = db.model('User', {
     account: {type: 'string'},
     password: {type: 'string'}
 });
+
+module.exports.User = User;
