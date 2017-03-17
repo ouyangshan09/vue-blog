@@ -17,7 +17,7 @@
                 <el-button @click="toRegister">注册</el-button>
             </el-form-item>
         </el-form>
-        <title-component :level="1">OUYANG</title-component>
+        <!--<title-component :level="1">OUYANG</title-component>-->
         <!--<video width="300" height="300" controls>-->
             <!--<source src="http://videos.kpie.com.cn/videos/20170313/5ABA1778-2EAA-4F53-9C19-1CEE7E203D59.mp4">-->
             <!--<source src="http://sz-kpie-test.oss-cn-shenzhen.aliyuncs.com/videos/20160725/0ea50d43-a043-4d31-bac1-aaa020541406.mp4">-->
@@ -27,10 +27,15 @@
 <script type="es6">
     // import {BooleanUtils, NumberUtils, ObjectUtils, DataType} from '../utils';
     import Title from '../component/title';
+    import User from '../entity/user';
 
     export default {
         components: {
             'title-component': Title
+        },
+        created(){
+            const user = User.id('1').account('ouyang').password('123').build();
+            console.log('user: ', user);
         },
         data(){
             return {
@@ -76,7 +81,6 @@
                         }).then(res => {
                             console.log('client login: ', res);
                         });
-                        console.log('success: ', userObj);
                     }else {
                         console.log('error submit');
                         return false;

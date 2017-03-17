@@ -5,7 +5,8 @@
  */
 var express = require('express');
 var router = express.Router();
-var User = require('../entity/User');
+// var User = require('../model/User');
+var db = require('../db/dbConnection');
 
 router.get('/testLogin', (request, response, next) => {
 
@@ -20,14 +21,16 @@ router.get('/testLogin', (request, response, next) => {
 router.post('/login', (request, response, next) => {
     const account = request.body.user.account;
     const password = request.body.user.password;
-    // let account = request.body.user.account;
-    // let password = request.body.user.password;
-    // User.insertOne({account: account, password: password}).exec().then(value => {
-    //     console.log('insertOne value: ', value);
+    // var user = new User({account: account, password: password});
+    // user.save(error => {
+    //     console.log('error: ', error);
     // });
-    // console.log('login request body: ', request.body);
+    let UserModel = db.model('User');
+    let userEntity = new UserModel({account: account, password: password});
+    userEntity.save();
+    console.log('User Module: ', userEntity.account);
     console.log('login request: ', `account: ${account} - password: ${password}`);
-    // console.log('User Module: ', User);
+
     response.send('login');
 });
 
