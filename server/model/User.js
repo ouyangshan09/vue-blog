@@ -4,16 +4,26 @@
  * @author Ouyang
  * @version 1.0
  */
-let mongoose = require('mongoose');
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-let User = new mongoose.Schema({
+const Name = 'User';
+
+let User = Schema({
     id: String,
     account: String,
     password: String,
     createTime: Number,
 });
-module.exports = User;
+User.methods.findTest = function (callback) {
+    console.log('测试findTest:', this.model('User'));
+    // return this.model('User')
+};
+User.getName = function () {
+    return Name;
+};
 
+module.exports = User;
 
 // var db = require('../db/dbConnection');
 //

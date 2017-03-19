@@ -34,8 +34,8 @@
             'title-component': Title
         },
         created(){
-            const user = User.id('1').account('ouyang').password('123').build();
-            console.log('user: ', user);
+            // const user = User.id('1').account('ouyang').password('123').build();
+            // console.log('user: ', user);
         },
         data(){
             return {

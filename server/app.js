@@ -19,6 +19,13 @@ routes.create(app);
 app.get('/', function (request, response, next) {
     response.send('Hello world');
 });
+app.use((err, req, res, next) => {
+    console.log('App 根节点处理错误: ', err.stack);
+    res.send({
+        msg: "错误",
+        state: false
+    });
+});
 
 app.set('port', process.env.PROT || 3009);
 app.listen(app.get('port'), function () {

@@ -10,7 +10,7 @@
 //
 // module.exports = DB;
 let mongoose = require('mongoose');
-let entity = require('../entity');
+let entity = require('../model');
 let db = mongoose.createConnection('mongodb://localhost:27017/ouyang_site');
 db.on('error', console.error.bind(console, '连接错误'));
 db.once('open', function () {
