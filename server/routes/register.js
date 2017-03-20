@@ -5,6 +5,7 @@
 const express = require('express');
 const uuid = require('node-uuid');
 const router = express.Router();
+const ErrorBuilder = require('../error/ErrorBuilder');
 const db = require('../db/dbConnection');
 const User = require('../model/User');
 const TimeUtils = require('../utils/timeUtils');
@@ -30,24 +31,34 @@ router.post('/register', (request, response, next) => {
         password,
     } = request.body.user;
     if(InfoUtils.isNull(account) || InfoUtils.isNull(password)){
-
+        let error = new Error(Base.PARAMS_EXCEPTION.getInfo());
+        error.code = Base.PARAMS_EXCEPTION.getCode();
+        next(error);
     }
-    // const createTime = TimeUtils.getTime();
-    // const id = uuid.v1();
-    // let userModel = db.model(User.getName());
-    // userModel.create({
-    //     id: id,
-    //     account: account,
-    //     password: password,
-    //     createTime: createTime
-    // }).then(value => {
-    //     console.log("create value: ", value);
-    // });
+    const createTime = TimeUtils.getTime();
+    const id = uuid.v1();
+    let userModel = db.model(User.getName());
+    userModel.findOne({
+        account: account
+    }).then(value => {
+        if(InfoUtils.isNull(value)){
+            userModel.create({
+                id: id,
+                account: account,
+                password: password,
+                createTime: createTime
+            }).then(value => {
+                console.log("create value: ", value);
+            });
+        }
+        console.log('find: ', value);
+    });
     // userModel.find({account: account}).where('password').equals(password).exec((value, user) =>{
     //     console.log('value: ', value);
     //     console.log('user: ', user);
     // });
-    next(Base.LOGIN_OUT_OF_DATE);
+    // next(new Error(Base.LOGIN_OUT_OF_DATE.getCode()));
+    next();
 }, (req, res, next) => {
     console.log('next2');
     res.send({
@@ -56,8 +67,7 @@ router.post('/register', (request, response, next) => {
 });
 //业务错误处理
 router.use((err, req, res, next) => {
-    console.log('error1: ', err);
-    console.log('error2:', typeof err);
+    console.log('error1: ', err.message);
     res.send({
         msg: "error"
     });
