@@ -7,7 +7,7 @@ class InfoUtils {
 }
 
 const isNull = value => {
-    return value === null || typeof (value).toLowerCase() === 'undefined';
+    return value === null || (typeof value).toLowerCase() === 'undefined';
 };
 const isObject = value => {
     return (typeof value).toLowerCase() === "function"

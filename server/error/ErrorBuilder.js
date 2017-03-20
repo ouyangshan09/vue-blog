@@ -14,4 +14,43 @@ class ErrorBuilder {
     };
 }
 
-module.exports = ErrorBuilder;
+class Exception extends Error{
+
+    constructor(){
+        super();
+        this.info = null;
+        this.code = null;
+    }
+    getInfo(){
+        return this.info;
+    }
+    getCode(){
+        return this.code;
+    }
+}
+
+let exception = new Exception();
+
+class ExceptionBuilder {
+
+    constructor(){
+        this.code = '';
+        this.info = '';
+    }
+    static Exception(){
+        return exception
+    }
+    // setInfo(value){
+    //     this.info = value;
+    //     return this;
+    // }
+    // setCode(value){
+    //     this.code = value;
+    //     return this;
+    // }
+    // build(){
+    //     return new Exception(this.builder());
+    // }
+}
+
+module.exports = ExceptionBuilder;

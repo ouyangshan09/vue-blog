@@ -15,8 +15,20 @@ const {
     Register
 } = require('../constant');
 
-const id = 1000;
+// const id = 1000;
 
+function* test(p){
+    console.log('p',p); // 1
+    var a = yield p + 1;
+    console.log('a', a); // 3
+}
+
+var g = test(1);
+var ret;
+ret = g.next();
+// console.log(ret); // { value: 2, done: false }
+ret = g.next();
+ret = g.next();
 //拦截器
 router.use((req, res, next) => {
     console.log('Time: ', TimeUtils.getFormatTime());
@@ -25,7 +37,8 @@ router.use((req, res, next) => {
 });
 
 router.post('/register', (request, response, next) => {
-    console.log('next1');
+    // console.log('next1');
+
     let {
         account,
         password,
@@ -38,21 +51,34 @@ router.post('/register', (request, response, next) => {
     const createTime = TimeUtils.getTime();
     const id = uuid.v1();
     let userModel = db.model(User.getName());
-    userModel.findOne({
-        account: account
-    }).then(value => {
-        if(InfoUtils.isNull(value)){
+    userModel.findOne({account: account}).exec(function (code, value) {
+        //查询不到数据则插入
+        if(InfoUtils.isNull(code) && InfoUtils.isNull(value)){
             userModel.create({
                 id: id,
                 account: account,
                 password: password,
                 createTime: createTime
             }).then(value => {
-                console.log("create value: ", value);
+                console.log('value2: ', value);
             });
         }
-        console.log('find: ', value);
     });
+    // userModel.findOne({
+    //     account: account
+    // }).then(value => {
+    //     if(InfoUtils.isNull(value)){
+    //         userModel.create({
+    //             id: id,
+    //             account: account,
+    //             password: password,
+    //             createTime: createTime
+    //         }).then(value => {
+    //             console.log("create value: ", value);
+    //         });
+    //     }
+    //     console.log('find: ', value);
+    // });
     // userModel.find({account: account}).where('password').equals(password).exec((value, user) =>{
     //     console.log('value: ', value);
     //     console.log('user: ', user);
@@ -60,14 +86,14 @@ router.post('/register', (request, response, next) => {
     // next(new Error(Base.LOGIN_OUT_OF_DATE.getCode()));
     next();
 }, (req, res, next) => {
-    console.log('next2');
+    // console.log('next2');
     res.send({
         name: 'hello'
     });
 });
 //业务错误处理
 router.use((err, req, res, next) => {
-    console.log('error1: ', err.message);
+    console.log('error1: ', err);
     res.send({
         msg: "error"
     });
