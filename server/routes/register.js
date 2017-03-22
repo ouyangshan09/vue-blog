@@ -20,33 +20,6 @@ const {
 
 // const id = 1000;
 
-// co(function *() {
-//     var now = Date.now();
-//     yield sleep(3000);
-//     console.log(Date.now() - now);
-// });
-// function sleep(ms) {
-//     return function (cb) {
-//         setTimeout(cb, ms);
-//     }
-// }
-
-var sleep2 = function (time) {
-    return new Promise(function (resolve, reject) {
-        setTimeout(function () {
-            // 模拟出错了，返回 ‘error’
-            resolve('error');
-        }, time);
-    })
-};
-
-var start = async function () {
-    for(let i = 0; i < 10; i++){
-        console.log(`当前是第${i}次等待`);
-        await sleep2(1000);
-    }
-};
-
 var readFile = function () {
     return new Promise(function (resolve, reject) {
         fs.readFile(path.join(__dirname, '../.babelrc'), 'utf-8', (err, data) => {
@@ -59,7 +32,6 @@ var readFile = function () {
     });
 
 };
-
 var readFileRun = async function () {
     try {
         var file = await readFile();
@@ -70,7 +42,6 @@ var readFileRun = async function () {
 
 };
 
-readFileRun();
 
 //拦截器
 router.use((req, res, next) => {
