@@ -39,3 +39,14 @@
     line-height: 1;
   }
 }
+
+//上传组件
+.el-upload{
+  display: inline-block;
+  text-align: center;
+  cursor: pointer;
+
+}
+.el-upload__input{
+  display: none;
+}

@@ -13,6 +13,7 @@ import Register from '../client/Register.vue';
 import Manager from '../client/Manager.vue';
 import Home from '../client/home.vue';
 import NotFound from '../component/NotFound.vue';
+import DevComponent from '../client/DevComponent.vue';
 
 Vue.use(Router);
 
@@ -46,6 +47,12 @@ export default new Router({
             path: '/manager',
             name: 'Manager',
             component: Manager
+        },
+        //组件测试开发
+        {
+            path: '/component-dev',
+            name: 'ComponentDev',
+            component: DevComponent
         },
         //无路由组件
         {

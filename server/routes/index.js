@@ -8,6 +8,7 @@ class Router{
     constructor(app){
         app.use('/api', require('./login'));
         app.use('/api', require('./register'));
+        app.use('/api', require('./upload'));
     }
 
     //创建

@@ -49,7 +49,7 @@ var start = async function () {
 
 var readFile = function () {
     return new Promise(function (resolve, reject) {
-        fs.readFile(path.join(__dirname, '../.babelrc2'), 'utf-8', (err, data) => {
+        fs.readFile(path.join(__dirname, '../.babelrc'), 'utf-8', (err, data) => {
             if(err == null){
                 resolve(data);
             }else {
