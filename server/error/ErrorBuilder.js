@@ -40,6 +40,12 @@ class ExceptionBuilder {
     static Exception(){
         return exception
     }
+    static create({code, info}){
+        let error = new Error(info);
+        error.info = info;
+        error.code = code;
+        return error;
+    }
     // setInfo(value){
     //     this.info = value;
     //     return this;

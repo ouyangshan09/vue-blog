@@ -13,12 +13,12 @@ describe('注册路由接口', function () {
             request(app)
                 .post('/api/register')
                 .set('Accept', 'application/json')
-                .send({
-                    user: {
-                        account: 'ouyang',
-                        password: '123'
-                    }
-                })
+                // .send({
+                //     user: {
+                //         account: 'ouyang',
+                //         password: '123'
+                //     }
+                // })
                 .expect(200)
                 .expect(function (res) {
                     assert.deepEqual(res.body, {name: 'hello'});
