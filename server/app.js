@@ -4,6 +4,7 @@
  * @author Ouyang
  * @version 1.0
  */
+require('babel-core/register');
 var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');

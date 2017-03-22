@@ -2,8 +2,11 @@
  * Created by OUYANG on 2017/3/15.
  * 注册业务路由
  */
+var path = require('path');
+var fs = require('fs');
 const express = require('express');
 const uuid = require('node-uuid');
+var co = require('co');
 const router = express.Router();
 const ErrorBuilder = require('../error/ErrorBuilder');
 const db = require('../db/dbConnection');
@@ -17,18 +20,58 @@ const {
 
 // const id = 1000;
 
-function* test(p){
-    console.log('p',p); // 1
-    var a = yield p + 1;
-    console.log('a', a); // 3
-}
+// co(function *() {
+//     var now = Date.now();
+//     yield sleep(3000);
+//     console.log(Date.now() - now);
+// });
+// function sleep(ms) {
+//     return function (cb) {
+//         setTimeout(cb, ms);
+//     }
+// }
 
-var g = test(1);
-var ret;
-ret = g.next();
-// console.log(ret); // { value: 2, done: false }
-ret = g.next();
-ret = g.next();
+var sleep2 = function (time) {
+    return new Promise(function (resolve, reject) {
+        setTimeout(function () {
+            // 模拟出错了，返回 ‘error’
+            resolve('error');
+        }, time);
+    })
+};
+
+var start = async function () {
+    for(let i = 0; i < 10; i++){
+        console.log(`当前是第${i}次等待`);
+        await sleep2(1000);
+    }
+};
+
+var readFile = function () {
+    return new Promise(function (resolve, reject) {
+        fs.readFile(path.join(__dirname, '../.babelrc2'), 'utf-8', (err, data) => {
+            if(err == null){
+                resolve(data);
+            }else {
+                reject(err);
+            }
+        });
+    });
+
+};
+
+var readFileRun = async function () {
+    try {
+        var file = await readFile();
+        console.log('file: ', file);
+    }catch(err) {
+        console.log('error: ', err);
+    }
+
+};
+
+readFileRun();
+
 //拦截器
 router.use((req, res, next) => {
     console.log('Time: ', TimeUtils.getFormatTime());
@@ -38,7 +81,6 @@ router.use((req, res, next) => {
 
 router.post('/register', (request, response, next) => {
     // console.log('next1');
-
     let {
         account,
         password,
@@ -64,6 +106,7 @@ router.post('/register', (request, response, next) => {
             });
         }
     });
+
     // userModel.findOne({
     //     account: account
     // }).then(value => {
