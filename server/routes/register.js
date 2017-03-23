@@ -39,7 +39,6 @@ var readFileRun = async function () {
     }catch(err) {
         console.log('error: ', err);
     }
-
 };
 
 //判断user对象是否存在,存在继续流程, 不存在则返回错误
