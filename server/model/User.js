@@ -19,6 +19,9 @@ User.methods.findTest = function (callback) {
     console.log('测试findTest:', this.model('User'));
     // return this.model('User')
 };
+User.methods.findAccount = function (callback) {
+
+};
 User.getName = function () {
     return Name;
 };

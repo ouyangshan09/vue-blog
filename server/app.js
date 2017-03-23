@@ -32,3 +32,5 @@ app.set('port', process.env.PROT || 3009);
 app.listen(app.get('port'), function () {
     console.log('Express server listening on port: ' + app.get('port'));
 });
+
+module.exports = app;

@@ -5,7 +5,6 @@
 var path = require('path');
 var fs = require('fs');
 const express = require('express');
-const uuid = require('node-uuid');
 var co = require('co');
 const router = express.Router();
 const ErrorBuilder = require('../error/ErrorBuilder');
@@ -13,39 +12,13 @@ const db = require('../db/dbConnection');
 const User = require('../model/User');
 const TimeUtils = require('../utils/timeUtils');
 const InfoUtils = require('../utils/infoUtils');
+const UUIDUtils = require('../utils/uuidUtils');
 const {
     Base,
     Register
 } = require('../constant');
 
 // const id = 1000;
-
-// co(function *() {
-//     var now = Date.now();
-//     yield sleep(3000);
-//     console.log(Date.now() - now);
-// });
-// function sleep(ms) {
-//     return function (cb) {
-//         setTimeout(cb, ms);
-//     }
-// }
-
-var sleep2 = function (time) {
-    return new Promise(function (resolve, reject) {
-        setTimeout(function () {
-            // 模拟出错了，返回 ‘error’
-            resolve('error');
-        }, time);
-    })
-};
-
-var start = async function () {
-    for(let i = 0; i < 10; i++){
-        console.log(`当前是第${i}次等待`);
-        await sleep2(1000);
-    }
-};
 
 var readFile = function () {
     return new Promise(function (resolve, reject) {
@@ -59,7 +32,6 @@ var readFile = function () {
     });
 
 };
-
 var readFileRun = async function () {
     try {
         var file = await readFile();
@@ -70,7 +42,17 @@ var readFileRun = async function () {
 
 };
 
-readFileRun();
+//判断user对象是否存在,存在继续流程, 不存在则返回错误
+const userObj = function (request, response, next) {
+    if(InfoUtils.isNull(request.body.user)){
+        next(ErrorBuilder.create({
+            code: Base.PARAMS_EXCEPTION.getCode(),
+            info: Base.PARAMS_EXCEPTION.getInfo()
+        }));
+    }
+    next();
+};
+
 
 //拦截器
 router.use((req, res, next) => {
@@ -79,25 +61,25 @@ router.use((req, res, next) => {
     next();
 });
 
-router.post('/register', (request, response, next) => {
-    // console.log('next1');
+router.post('/register', userObj, (request, response, next) => {
     let {
         account,
         password,
     } = request.body.user;
     if(InfoUtils.isNull(account) || InfoUtils.isNull(password)){
-        let error = new Error(Base.PARAMS_EXCEPTION.getInfo());
-        error.code = Base.PARAMS_EXCEPTION.getCode();
-        next(error);
+        next(ErrorBuilder.create({
+            code: Base.PARAMS_EXCEPTION.getCode(),
+            info: Base.PARAMS_EXCEPTION.getInfo()
+        }));
     }
+    const uuid = UUIDUtils.createUUID();
     const createTime = TimeUtils.getTime();
-    const id = uuid.v1();
     let userModel = db.model(User.getName());
     userModel.findOne({account: account}).exec(function (code, value) {
         //查询不到数据则插入
         if(InfoUtils.isNull(code) && InfoUtils.isNull(value)){
             userModel.create({
-                id: id,
+                id: uuid,
                 account: account,
                 password: password,
                 createTime: createTime
