@@ -1,12 +1,14 @@
 <script>
 import Upload from './upload.vue';
+import UploadList from './upload-list.vue';
 
 function noop() {}
 
 export default{
 
     components: {
-        Upload
+        Upload,
+        UploadList
     },
     props: {
         headers: {
@@ -139,8 +141,12 @@ export default{
             console.log('handleError: ', err);
         },
         handleRemove(file){
+            let fileList = this.uploadFiles;
+            fileList.splice(fileList.indexOf(file), 1);
+            this.onRemove(file, fileList);
             console.log('handleRemove: ', file);
         },
+        //通过原始fileObject获取本控件处理后的fileObject
         getFile(rawFile){
             let fileList = this.uploadFiles;
             let target;
@@ -150,11 +156,25 @@ export default{
             });
             return target;
         },
+        //手动提交
+        submit(){
+
+        },
         clearFiles(){
             this.uploadFiles = [];
         }
     },
     render(h){
+        let uplaodList;
+        uplaodList = (
+            <UploadList
+                listType={this.listType}
+                files={this.uploadFiles}
+                on-remove={this.handleRemove}
+                handlePreview={this.onPreview}
+            ></UploadList>
+        );
+
         const uploadData = {
             props: {
                 type: this.type,
@@ -180,10 +200,12 @@ export default{
         const uploadComponent = <upload {...uploadData}>{trigger}</upload>;
         return (
             <div>
+                { this.listType === 'picture-card' ? uplaodList : ''}
                 {
                     this.$slots.trigger ? [uploadComponent, this.$slots.default] : uploadComponent
                 }
                 {this.$slots.tip}
+                { this.listType !== 'picture-card' ? uplaodList : ''}
             </div>
         );
     }

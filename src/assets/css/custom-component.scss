@@ -50,3 +50,233 @@
 .el-upload__input{
   display: none;
 }
+//按钮组件基类样式
+.oy-button{
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: 400;
+  font-size: 12px;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  background-image: none;
+  background-color: #f7f7f7;
+  border: 1px solid transparent;
+  border-color: #d7ddc4;
+  line-height: 1.5;
+  border-radius: 4px;
+  transform: translate3d(0,0,0);
+  transition: color .2s linear, background .2s linear, border .2s linear;
+  color: #657180;
+  touch-action: manipulation;
+  user-select: none;
+  padding: 6px 15px;
+  white-space: nowrap;
+  &:hover{
+    color: $blue-border;
+    background-color: $white-bg;
+    border-color: $blue-border;
+  }
+  //禁用状态
+  &.is-disabled{
+    color: #bfcbd9;
+    cursor: not-allowed;
+    background-image: none;
+    background-color: #eef1f6;
+    border-color: #d1dbe5;
+    &:hover{
+      color: #bfcbd9;
+      cursor: not-allowed;
+      background-image: none;
+      background-color: #eef1f6;
+      border-color: #d1dbe5;
+    }
+  }
+  &.is-loading{
+    position: relative;
+    pointer-events: none;
+    &:before{
+      pointer-events: none;
+      content: '';
+      position: absolute;
+      left: -1px;
+      top: -1px;
+      right: -1px;
+      bottom: -1px;
+      border-radius: inherit;
+      background-color: hsla(0, 0%, 100%, .35);
+    }
+  }
+}
+//按钮主要信息颜色
+.oy-button--primary{
+  color: $white-bg;
+  background-color: $primary-color;
+  border-color: $primary-color;
+  &:hover{
+    color: $white-bg;
+    background-color: $primary-color-hover;
+    border-color: $primary-color-hover;
+  }
+}
+.oy-button--primary.is-plain{
+  background: $white-bg;
+  border:  1px solid $plain-border-color;
+  color: $plain-color;
+  &:hover{
+    background: $white-bg;
+    border-color: $primary-color;
+    color: $primary-color;
+  }
+}
+//按钮次要信息颜色
+.oy-button--info{
+  color: $white-bg;
+  background-color: $info-color;
+  border-color: $info-color;
+  &:hover{
+    color: $white-bg;
+    background-color: $info-color-hover;
+    border-color: $info-color-hover;
+  }
+}
+.oy-button--info.is-plain{
+  background: $white-bg;
+  border:  1px solid $plain-border-color;
+  color: $plain-color;
+  &:hover{
+    background: $white-bg;
+    border-color: $info-color;
+    color: $info-color;
+  }
+}
+//按钮成功信息颜色
+.oy-button--success{
+  color: $white-bg;
+  background-color: $success-color;
+  border-color: $success-color;
+  &:hover{
+    color: $white-bg;
+    background-color: $success-color-hover;
+    border-color: $success-color-hover;
+  }
+}
+//按钮成功信息朴素颜色
+.oy-button--success.is-plain{
+  background: $white-bg;
+  border:  1px solid $plain-border-color;
+  color: $plain-color;
+  &:hover{
+    background: $white-bg;
+    border-color: $success-color;
+    color: $success-color;
+  }
+}
+//按钮警告信息颜色
+.oy-button--warning{
+  color: $white-bg;
+  background-color: $warning-color;
+  border-color: $warning-color;
+  &:hover{
+    color: $white-bg;
+    background-color: $warning-color-hover;
+    border-color: $warning-color-hover;
+  }
+}
+.oy-button--warning.is-plain{
+  background: $white-bg;
+  border:  1px solid $plain-border-color;
+  color: $plain-color;
+  &:hover{
+    background: $white-bg;
+    border-color: $warning-color;
+    color: $warning-color;
+  }
+}
+//按钮错误信息颜色
+.oy-button--error{
+  color: $white-bg;
+  background-color: $error-color;
+  border-color: $error-color;
+  &:hover{
+    color: $white-bg;
+    background-color: $error-color-hover;
+    border-color: $error-color-hover;
+  }
+}
+.oy-button--error.is-plain{
+  background: $white-bg;
+  border:  1px solid $plain-border-color;
+  color: $plain-color;
+  &:hover{
+    background: $white-bg;
+    border-color: $error-color;
+    color: $error-color;
+  }
+}
+//按钮文本信息颜色
+.oy-button--text{
+  color: $text-color;
+  background-color: transparent;
+  border-color: transparent;
+  &:hover{
+    color: $text-color-hover;
+    background-color: transparent;
+    border-color: transparent;
+  }
+}
+//按钮边框虚线
+.oy-button--dashed{
+  color: $text-color;
+  background-color: transparent;
+  border-color: #d7dde4;
+  border-style: dashed;
+}
+//按钮默认样式
+.oy-button--default{
+  color: $text-color;
+  background-color: $white-bg;
+  border-color: #d7dde4;
+}
+//按钮尺寸 大
+.oy-button--large{
+  padding: 12px 22px;
+  font-size: 16px;
+  border-radius: 4px;
+}
+//按钮尺寸 小
+.oy-button--small{
+  padding: 6px 14px;
+  font-size: 12px;
+  border-radius: 4px;
+}
+//按钮尺寸 小小
+.oy-button--mini{
+  padding: 4px;
+  font-size: 12px;
+  border-radius: 4px;
+}
+//按钮长度
+.oy-button--long{
+  width: 100%;
+}
+
+//共有属性
+.oy-button{
+  outline: 0;
+}
+.oy-button [class*=el-icon-]+span{
+  margin-left: 5px;
+}
+.oy-icon--right{
+  margin-left: 5px;
+}
+
+//加载状态
+.is-loading{
+
+}
+//
+.is-plain{
+
+}

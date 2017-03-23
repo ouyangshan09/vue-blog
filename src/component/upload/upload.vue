@@ -47,7 +47,7 @@ export default {
         },
         //input控件回调监听, 是整个上传文件的开始点, 当用户选择文件后,便开始上传流程
         handleChange(ev){
-            console.log('upload->handleChange');
+//            console.log('upload->handleChange');
             const files = ev.target.files;
             if(!files) return;
             this.uploadFiles(files);
@@ -56,7 +56,7 @@ export default {
         //提取files(数组)中需要的文件
         //文件不为图片则终止上传
         uploadFiles(files){
-            console.log('upload->uploadFiles: ', files);
+//            console.log('upload->uploadFiles: ', files);
             let postFiles = Array.prototype.slice.call(files);
             if(!this.multiple){
                 postFiles = postFiles.slice(0, 1);
@@ -74,7 +74,7 @@ export default {
         },
         //准备上传阶段, 调用外部钩子, 根据外部钩子操作流程
         upload(rawFile, file){
-            console.log('upload->upload: ', rawFile);
+//            console.log('upload->upload: ', rawFile);
             if(!this.beforeUpload){
                 return this.post(rawFile);
             }
@@ -115,13 +115,13 @@ export default {
                     this.onError(err, rawFile);
                 }
             };
-            console.log('upload->post: ', option);
+//            console.log('upload->post: ', option);
             ajax(option);
         },
         //通过隐藏input，通过定义元素来调用input点击事件
         handleClick(){
             this.$refs.input.click();
-            console.log('upload->handleClick')
+//            console.log('upload->handleClick')
         },
     },
     render(h){
@@ -142,6 +142,7 @@ export default {
                 click: handleClick
             }
         };
+        data.class[`el-upload--${listType}`] = true;
         return (
             <div {...data}>
                 {this.$slots.default}
