@@ -65,15 +65,18 @@ export default{
         listType: {
             type: String,
             default: 'text'   // text,picture,picture-card
-        }
+        },
+        httpRequest: Function
     },
     data(){
         return {
+            //控件上传文件列表
             uploadFiles: [],
             tempIndex: 1,
         }
     },
     watch: {
+        //外部fileList文件列表
         fileList: {
             immediate: true,
             handler(fileList){
@@ -169,6 +172,7 @@ export default{
                 'on-preview': this.onPreview,
                 'on-remove': this.handleRemove,
                 'before-upload': this.beforeUpload,
+                'http-request': this.httpRequest
             },
             ref: 'upload-inner'
         };

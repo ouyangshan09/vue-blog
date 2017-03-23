@@ -3,8 +3,6 @@ import ajax from './ajax';
 
 export default {
     props: {
-        withCredentials: Boolean,
-        data: Object,
         type: String,
         action: {
             type: String,
@@ -14,9 +12,13 @@ export default {
             type: String,
             default: 'file'
         },
+        data: Object,
         headers: Object,
+        withCredentials: Boolean,
         multiple: Boolean,
         accept: String,
+        drag: Boolean,
+        autoUpload: Boolean,
         onStart: Function,
         onProgress: Function,
         onSuccess: Function,
@@ -30,6 +32,7 @@ export default {
             type: Function,
             default: function () {}
         },
+        httpRequest: Function,
         fileList: Array,
         listType: String,
     },
@@ -45,7 +48,6 @@ export default {
         //input控件回调监听, 是整个上传文件的开始点, 当用户选择文件后,便开始上传流程
         handleChange(ev){
             console.log('upload->handleChange');
-            console.log('ev: ', ev);
             const files = ev.target.files;
             if(!files) return;
             this.uploadFiles(files);
@@ -54,6 +56,7 @@ export default {
         //提取files(数组)中需要的文件
         //文件不为图片则终止上传
         uploadFiles(files){
+            console.log('upload->uploadFiles: ', files);
             let postFiles = Array.prototype.slice.call(files);
             if(!this.multiple){
                 postFiles = postFiles.slice(0, 1);
