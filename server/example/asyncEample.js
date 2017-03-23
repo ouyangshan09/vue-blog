@@ -4,7 +4,6 @@
  * @author Ouyang
  */
 
-require('babel-core/register');
 const fs = require('fs');
 const path = require('path');
 
@@ -17,10 +16,10 @@ const readFile = function (fileName) {
         });
     })
 };
-const asyncReadFile = async function (){
-    return await readFile(path.join(__dirname, '../.babelrc'));
+let asyncReadFile = async function (){
+    const file = await readFile(path.join(__dirname, '../.babelrc'));
+    return file;
 };
 
-console.log('fs: ', fs);
 
-module.exports = asyncReadFile();
+module.exports = asyncReadFile;
