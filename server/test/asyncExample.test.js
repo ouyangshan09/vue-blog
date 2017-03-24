@@ -2,7 +2,7 @@
  * Created by OUYANG on 2017/3/23.
  * 测试执行
  */
-const AsyncExample = require('../server/example/asyncEample');
+const AsyncExample = require('../example/asyncEample');
 
 
 describe('ES7标准测试 异步', function () {

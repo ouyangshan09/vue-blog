@@ -4,4 +4,4 @@
  */
 // require('./asyncExample.test');
 // require('./register.test');
-require('./db-user.test');
+require('./db-user.test.js');

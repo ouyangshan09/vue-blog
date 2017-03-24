@@ -23,14 +23,38 @@ User.methods.findTest = function (callback) {
     console.log('测试findTest:', this.model('User'));
     // return this.model('User')
 };
-User.methods.findAccount = function (callback) {
+User.methods.findAccount = function () {
     const model = this.model(User.getName());
-    return 'findAccount';
+    return this.account;
+};
+/**查询账号是否存在*/
+User.methods.findAccountIsExist = function () {
+    const model = this.model(User.getName());
+    return new Promise((resolve, reject) => {
+        model.findOne({ account: this.account}).exec(function (err, value) {
+            if(err) reject(err);
+            resolve(value);
+        });
+    });
+};
+/**创建账号*/
+User.methods.createAccount = function () {
+    const model = this.model(User.getName());
+    return new Promise((resolve, reject) => {
+        model.create({
+            id: this.id,
+            account: this.account,
+            password: this.password,
+            createTime: this.createTime
+        }, function (err, value, snickers) {
+            if(err) reject(err);
+            resolve(value);
+        });
+    })
 };
 User.getName = function () {
     return Name;
 };
-
 module.exports = User;
 
 // var db = require('../db/dbConnection');

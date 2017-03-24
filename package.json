@@ -10,7 +10,7 @@
     "build": "node build/build.js",
     "bundle": "webpack --progress --colors --config ./build/webpack.dll.conf.js",
     "bundle2": "node build/dll-bundle.js",
-    "test": "mocha --opts ./test/mocha.opts ./test/index.test.js"
+    "test": "mocha --opts ./mocha.opts ./server/test/index.test.js"
   },
   "author": "ouyang",
   "license": "ISC",
