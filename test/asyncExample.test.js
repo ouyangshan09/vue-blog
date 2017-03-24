@@ -2,14 +2,17 @@
  * Created by OUYANG on 2017/3/23.
  * 测试执行
  */
-const AsyncReadFile = require('../server/example/asyncEample');
+const AsyncExample = require('../server/example/asyncEample');
 
 
 describe('ES7标准测试 异步', function () {
     describe('Async', function () {
         it('返回文件结果', function () {
-            AsyncReadFile().then(file => {
-                console.log('返回文件结果 file: ', file);
+            AsyncExample.asyncReadFile().then(file => {
+                console.log('读取文件 file: ', file);
+            });
+            AsyncExample.asyncWriteFile().then(state => {
+                console.log('写入文件', state);
             });
         });
     });

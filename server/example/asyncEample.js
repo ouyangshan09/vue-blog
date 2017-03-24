@@ -16,10 +16,24 @@ const readFile = function (fileName) {
         });
     })
 };
-let asyncReadFile = async function (){
+const asyncReadFile = async function (){
     const file = await readFile(path.join(__dirname, '../.babelrc'));
     return file;
 };
+const writeFile = function (fileName) {
+    return new Promise((resolve, reject) => {
+        fs.writeFile(fileName, 'Hello world', 'utf-8', err => {
+            if(err) reject(err);
+            resolve('success')
+        });
+    })
+};
+const asyncWriteFile = async function () {
+    return writeFile('./test/message.text');
+};
 
 
-module.exports = asyncReadFile;
+module.exports = {
+    asyncReadFile,
+    asyncWriteFile
+};
