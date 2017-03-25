@@ -2,9 +2,6 @@
  * Created by ouyangshan09 on 2017/3/18.
  * 参数唯恐判断封装
  */
-class InfoUtils {
-
-}
 
 const isNull = value => {
     return value === null || (typeof value).toLowerCase() === 'undefined';
