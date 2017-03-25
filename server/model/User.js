@@ -18,6 +18,10 @@ let User = Schema({
     password: String,
     //创建时间
     createTime: Number,
+    //登录令牌
+    token: String,
+    //令牌过期时间
+    tokenExpectTime: Number,
 });
 User.methods.findTest = function (callback) {
     console.log('测试findTest:', this.model('User'));
@@ -50,6 +54,18 @@ User.methods.createAccount = function () {
             if(err) reject(err);
             resolve(value);
         });
+    })
+};
+/**
+ * 创建帐号登录Token和持续时间
+ * @field account 查询帐号
+ * @field token 登录令牌
+ * @field tokenTime 令牌持续时间
+ * */
+User.methods.createAccountTokenAndTokenTime = function ({account, token, tokenTime}) {
+    const model = this.model(User.getName());
+    return new Promise((resolve, reject) => {
+
     })
 };
 User.getName = function () {

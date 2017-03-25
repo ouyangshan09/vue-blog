@@ -39,37 +39,43 @@ const queryAccountAfterCreateThat = async function (acObj) {
     }
     return null;
 };
+//创建用户Token和Token持续时间
+const createAccountTokenAndTokenTime = async function ({account}) {
+    const userModel = db.model(User.getName());
+    const userEntity = new userModel({
+        account: account
+    });
+
+};
 
 describe('数据库测试', function () {
     describe('User query', function () {
-        it('结果', function (done) {
-            // queryAccount('123').then(data => {
-            //     console.log('result: ', data);
-            //     done();
-            // });
-            done()
-        });
+        // it('结果', function (done) {
+        //     queryAccount('123').then(data => {
+        //         console.log('result: ', data);
+        //         done();
+        //     });
+        // });
     });
     describe('User create', function () {
-        it('结果', function (done) {
-            // createAccount().then(data => {
-            //     console.log('result: ', data);
-            //     done();
-            // });
-            done()
-        });
+        // it('结果', function (done) {
+        //     createAccount().then(data => {
+        //         console.log('result: ', data);
+        //         done();
+        //     });
+        // });
     });
     describe('User query after create', function () {
-        it('结果', function (done) {
-            queryAccountAfterCreateThat({
-                id: '100010',
-                account: 'ouyangshan0914',
-                password: 'lixiaoshan',
-                createTime: 1490348342
-            }).then(data => {
-                console.log('result: ', data);
-                done();
-            });
-        })
+        // it('结果', function (done) {
+        //     queryAccountAfterCreateThat({
+        //         id: '100010',
+        //         account: 'ouyangshan0914',
+        //         password: 'lixiaoshan',
+        //         createTime: 1490348342
+        //     }).then(data => {
+        //         console.log('result: ', data);
+        //         done();
+        //     });
+        // });
     });
 });
