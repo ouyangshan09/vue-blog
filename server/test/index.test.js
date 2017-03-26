@@ -5,4 +5,3 @@
 // require('./asyncExample.test');
 // require('./register.test');
 require('./db-user.test.js');
-// require('./timeUtils.test');

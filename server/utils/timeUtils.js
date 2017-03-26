@@ -93,12 +93,5 @@ class TimeUtils {
         }
         return 0;
     }
-    /**
-     * 比较现在的时间
-     * @field timeTemp 10位时间戳
-     * */
-    static compareNowTime(timeTemp){
-        return timeTemp <= this.getTime();
-    }
 }
 module.exports = TimeUtils;
