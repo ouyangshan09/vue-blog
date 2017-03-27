@@ -23,14 +23,6 @@ let User = Schema({
     //令牌过期时间
     tokenExpectTime: Number,
 });
-User.methods.findTest = function (callback) {
-    console.log('测试findTest:', this.model('User'));
-    // return this.model('User')
-};
-User.methods.findAccount = function () {
-    const model = this.model(User.getName());
-    return this.account;
-};
 /**查询账号是否存在*/
 User.methods.findAccountIsExist = function () {
     const model = this.model(User.getName());
@@ -67,6 +59,16 @@ User.methods.createAccountTokenAndTokenTime = function ({account, token, tokenTi
     return new Promise((resolve, reject) => {
 
     })
+};
+//测试数据库更新方法
+User.methods.updateTest = function () {
+    const model = this.model(User.getName());
+    return new Promise((resolve, reject) => {
+        model.findById('58cfaf179830ae3480490c06', function (err, value) {
+            if(err) reject(err);
+            resolve(value);
+        })
+    });
 };
 User.getName = function () {
     return Name;

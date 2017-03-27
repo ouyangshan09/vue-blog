@@ -40,7 +40,24 @@ const queryAccountAfterCreateThat = async function (acObj) {
     return null;
 };
 
+//创建用户Token和过期时间
+const createAccountTokenAndExpiresTime = async function (account) {
+    const userModel = db.model(User.getName());
+    const userEntity = new userModel({ account: account});
+    // const queryResult = await userEntity.findAccountIsExist();
+    const result = await userEntity.updateTest({});
+    return result;
+};
+
 describe('数据库测试', function () {
+    describe('User Token', function () {
+        it('结果', function (done) {
+            createAccountTokenAndExpiresTime('ouyangshan09').then(data => {
+                console.log('data: ', data);
+                done();
+            });
+        })
+    });
     describe('User query', function () {
         it('结果', function (done) {
             // queryAccount('123').then(data => {
