@@ -44,15 +44,20 @@ const queryAccountAfterCreateThat = async function (acObj) {
 const createAccountTokenAndExpiresTime = async function (account) {
     const userModel = db.model(User.getName());
     const userEntity = new userModel({ account: account});
-    // const queryResult = await userEntity.findAccountIsExist();
-    const result = await userEntity.updateTest({});
-    return result;
+    try {
+        const queryResult = await userEntity.findAccountIsExist();
+        // const createAccountToken = await queryResult.createAccountTokenAndTokenTime('token2', 10001);
+        const createAccountToken = await queryResult.updateTest2('ouyang7', 7);
+        return createAccountToken;
+    }catch(e) {
+        return null;
+    }
 };
 
 describe('数据库测试', function () {
     describe('User Token', function () {
         it('结果', function (done) {
-            createAccountTokenAndExpiresTime('ouyangshan09').then(data => {
+            createAccountTokenAndExpiresTime('ouyangshan0914').then(data => {
                 console.log('data: ', data);
                 done();
             });

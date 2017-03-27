@@ -21,9 +21,13 @@ let User = Schema({
     //登录令牌
     token: String,
     //令牌过期时间
-    tokenExpectTime: Number,
+    tokenExpiresTime: Number,
 });
-/**查询账号是否存在*/
+/**
+ * 查询账号是否存在
+ * Y: 则返回查询结果
+ * N: 则返回null
+ * */
 User.methods.findAccountIsExist = function () {
     const model = this.model(User.getName());
     return new Promise((resolve, reject) => {
@@ -54,17 +58,32 @@ User.methods.createAccount = function () {
  * @field token 登录令牌
  * @field tokenTime 令牌持续时间
  * */
-User.methods.createAccountTokenAndTokenTime = function ({account, token, tokenTime}) {
+User.methods.createAccountTokenAndTokenTime = function (token, expiresTime) {
     const model = this.model(User.getName());
     return new Promise((resolve, reject) => {
-
+        this.token = token;
+        this.tokenExpiresTime = expiresTime;
+        this.save((err, value) =>{
+            if(err) reject(err);
+            resolve(value);
+        });
     })
+};
+//虽然说curd是异步的，但回调中的数据还是上一次的，非最新
+User.methods.updateTest2 = function (token, time) {
+    const model = this.model(User.getName());
+    return new Promise((resolve, reject) => {
+        model.findByIdAndUpdate(this._id, {token: token, tokenExpiresTime: time}, {new: true}, function (err, value) {
+            if(err) reject(err);
+            resolve(value);
+        })
+    });
 };
 //测试数据库更新方法
 User.methods.updateTest = function () {
     const model = this.model(User.getName());
     return new Promise((resolve, reject) => {
-        model.findById('58cfaf179830ae3480490c06', function (err, value) {
+        model.findById('58d612306c150f106865bdb4', function (err, value) {
             if(err) reject(err);
             resolve(value);
         })
