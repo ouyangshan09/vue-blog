@@ -11,7 +11,7 @@ describe('用户接口测试', function () {
             const userApi = new UserApi();
             try {
                 userApi.updateTokenExpires({
-                    account: 'ouyangjun0912',
+                    account: 'ouyangshan0914',
                     expires: '2'
                 }).then(data => {
                     console.log('update result: ', data);

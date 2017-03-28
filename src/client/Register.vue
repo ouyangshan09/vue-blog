@@ -56,8 +56,8 @@
                         tigger: 'blur'
                     },{
                         min: 3,
-                        max: 12,
-                        message: '长度在3到12个字符',
+                        max: 20,
+                        message: '长度在3到20个字符',
                         tigger: 'blur'
                     }],
                     password: [{

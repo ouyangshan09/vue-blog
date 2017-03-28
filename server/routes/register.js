@@ -5,7 +5,12 @@
 import express from 'express';
 import ErrorBuilder from '../error/ErrorBuilder';
 import * as Utils from '../utils/infoUtils';
-import {Base, Register} from '../constant';
+import {BaseType} from '../constant';
+import {
+    RegisterResponseExist,
+    RegisterResponseSuccess,
+    RegisterResponseFailure
+} from '../responseObj/registerResponseObj';
 import UserApi from '../api/user.api';
 
 
@@ -16,8 +21,8 @@ let userApi = new UserApi();
 const verifyUserObj = function (request, response, next) {
     if(Utils.isNull(request.body.user)){
         next(ErrorBuilder.create({
-            code: Base.PARAMS_EXCEPTION.getCode(),
-            info: Base.PARAMS_EXCEPTION.getInfo()
+            code: BaseType.PARAMS_EXCEPTION.getCode(),
+            info: BaseType.PARAMS_EXCEPTION.getInfo()
         }));
     }
     next();
@@ -41,8 +46,8 @@ router.post('/register', verifyUserObj, (request, response, next) => {
     } = request.body.user;
     if(Utils.isNull(account) || Utils.isNull(password)){
         next(ErrorBuilder.create({
-            code: Base.PARAMS_EXCEPTION.getCode(),
-            info: Base.PARAMS_EXCEPTION.getInfo()
+            code: BaseType.PARAMS_EXCEPTION.getCode(),
+            info: BaseType.PARAMS_EXCEPTION.getInfo()
         }));
     }
     try {
@@ -51,24 +56,15 @@ router.post('/register', verifyUserObj, (request, response, next) => {
             password: password
         }).then(data => {
             if(!Utils.isNull(data)){
-                const info = {
-                    code: Register.SUCCESS.getCode(),
-                    info: Register.SUCCESS.getInfo(),
-                    data: data
-                };
-                response.json(info);
-            } else {
-                const info = {
-                    code: Register.EXIST.getCode(),
-                    info: Register.EXIST.getInfo()
-                };
-                response.json(info);
+                response.json(new RegisterResponseSuccess(data));
+            }else {
+                response.json(new RegisterResponseExist());
             }
         });
     }catch (e){
         next(ErrorBuilder.create({
-            code: Base.LOGIC_EXCEPTION.getCode(),
-            info: Base.LOGIC_EXCEPTION.getInfo()
+            code: BaseType.LOGIC_EXCEPTION.getCode(),
+            info: BaseType.LOGIC_EXCEPTION.getInfo()
         }));
     }
 });
