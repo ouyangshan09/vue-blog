@@ -4,8 +4,6 @@
  * @author Ouyang
  * @version 1.0
  */
-import path from 'path';
-import jwt from 'jsonwebtoken';
 import db from '../db/dbConnection';
 import User from '../model/User';
 import * as Utils from '../utils/infoUtils';
@@ -78,6 +76,19 @@ class UserApi {
         const token = UUIDUtils.createToken(result, privateKey);
         const expiresValue = TimeUtils.calculateScheduledHourTimestamp(expires);
         return await result.createAccountTokenAndTokenTime(token, expiresValue);
+    }
+    /**
+     * 更新用户Token持续时间
+     * @field obj Object {account: xx, expires: xx}
+     * */
+    async updateTokenExpires(obj){
+        const {account, expires = 1} = obj;
+        const expiresValue = TimeUtils.calculateScheduledHourTimestamp(expires);
+        const result = await this.findByAccount(account);
+        if(Utils.isNull(result)){
+            return null;
+        }
+        return await result.updateTokenExpires(expiresValue);
     }
 }
 

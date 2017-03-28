@@ -5,11 +5,13 @@
  * @version 1.0
  */
 require('babel-core/register');
-var express = require('express');
+//环境配置
+require('./config');
 var path = require('path');
+var express = require('express');
 var bodyParser = require('body-parser');
 var routes = require('./routes');
-let app = express();
+var app = express();
 
 //注意，该中间件的顺序不要写错了，如果在router后面会造成请求无法解析参数
 app.use(bodyParser.urlencoded({ extended: true }));

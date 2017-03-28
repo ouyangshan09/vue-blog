@@ -5,12 +5,12 @@
   "scripts": {
     "dev": "webpack-dev-server --config ./build/webpack.dev.conf.js -d",
     "dev-hot": "node build/dev-server.js",
-    "service": "set process.env.NODE_ENV=production&& node ./server/app.js",
-    "service-hot": "set process.env.NODE_ENV=development&& supervisor ./server/app.js",
+    "service": "set NODE_ENV=production&& node ./server/app.js",
+    "service-hot": "set NODE_ENV=development&& supervisor ./server/app.js",
     "build": "node build/build.js",
     "bundle": "webpack --progress --colors --config ./build/webpack.dll.conf.js",
     "bundle2": "node build/dll-bundle.js",
-    "test": " set process.env.NODE_ENV=testing&& mocha --opts ./mocha.opts ./server/test/index.test.js"
+    "test": " set NODE_ENV=testing&& mocha --opts ./mocha.opts ./server/test/index.test.js"
   },
   "author": "ouyang",
   "license": "ISC",
@@ -45,6 +45,7 @@
     "mocha": "^3.2.0",
     "mongolass": "^2.4.3",
     "mongoose": "^4.9.0",
+    "morgan": "^1.8.1",
     "node-sass": "^4.5.0",
     "node-uuid": "^1.4.7",
     "opn": "^4.0.2",

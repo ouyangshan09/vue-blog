@@ -6,7 +6,23 @@ import assert from 'assert';
 import UserApi from '../api/user.api';
 
 describe('用户接口测试', function () {
-    describe('createTokenAndExpires', function () {
+    describe('updateTokenExpires', function () {
+        it('update result', function (done) {
+            const userApi = new UserApi();
+            try {
+                userApi.updateTokenExpires({
+                    account: 'ouyangjun0912',
+                    expires: '2'
+                }).then(data => {
+                    console.log('update result: ', data);
+                    done();
+                });
+            }catch (e){
+                done();
+            }
+        });
+    });
+    describe.skip('createTokenAndExpires', function () {
         it('account result', function (done) {
             const userApi = new UserApi();
             try {
