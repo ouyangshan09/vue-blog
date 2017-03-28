@@ -9,7 +9,7 @@ const timeUtils = require('../utils/timeUtils');
 describe('时间戳工具测试', function () {
     describe('calculateScheduledTime', function () {
         it('结果', function () {
-            const temp = timeUtils.calculateScheduledHourTime('10');
+            const temp = timeUtils.calculateScheduledHourTimestamp('10');
             const nowTemp = timeUtils.getTime() + temp;
             console.log('temp: ', temp);
             console.log('nowTemp: ', nowTemp);

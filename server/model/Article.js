@@ -3,7 +3,7 @@
  * 文章数据模块
  * @author
  */
-let mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const Name = 'Article';
 
@@ -18,4 +18,4 @@ let Article = new mongoose.Schema({
 Article.getName = function () {
     return Name;
 };
-module.exports = Article;
+export default Article;

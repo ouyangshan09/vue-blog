@@ -2,44 +2,19 @@
  * Created by OUYANG on 2017/3/15.
  * 注册业务路由
  */
-var path = require('path');
-var fs = require('fs');
-const express = require('express');
-var co = require('co');
-const router = express.Router();
-const ErrorBuilder = require('../error/ErrorBuilder');
-const db = require('../db/dbConnection');
-const User = require('../model/User');
-const TimeUtils = require('../utils/timeUtils');
-const InfoUtils = require('../utils/infoUtils');
-const UUIDUtils = require('../utils/uuidUtils');
-const {
-    Base,
-    Register
-} = require('../constant');
+import path from 'path';
+import fs from 'fs';
+import express from 'express';
+import ErrorBuilder from '../error/ErrorBuilder';
+import db from '../db/dbConnection';
+import User from '../model/User';
+import TimeUtils from '../utils/timeUtils';
+import * as InfoUtils from '../utils/infoUtils';
+import UUIDUtils from '../utils/uuidUtils';
+import {Base, Register } from '../constant';
 
-// const id = 1000;
+let router = express.Router();
 
-var readFile = function () {
-    return new Promise(function (resolve, reject) {
-        fs.readFile(path.join(__dirname, '../.babelrc'), 'utf-8', (err, data) => {
-            if(err == null){
-                resolve(data);
-            }else {
-                reject(err);
-            }
-        });
-    });
-
-};
-var readFileRun = async function () {
-    try {
-        var file = await readFile();
-        console.log('file: ', file);
-    }catch(err) {
-        console.log('error: ', err);
-    }
-};
 
 //判断user对象是否存在,存在继续流程, 不存在则返回错误
 const userObj = function (request, response, next) {

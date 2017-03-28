@@ -4,4 +4,5 @@
  */
 // require('./asyncExample.test');
 // require('./register.test');
-require('./db-user.test.js');
+// require('./db-user.test.js');
+import './userApi.test';

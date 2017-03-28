@@ -16,13 +16,11 @@ class RegisterType {
     getCode(){
         return this.code;
     }
-
 }
 
-let Register = {
+const Register = {
     SUCCESS: new RegisterType('注册成功', 100),
     FAILURE: new RegisterType('注册失败', 101),
     EXIST: new RegisterType('帐号已存在', 102),
 };
-
-module.exports = Register;
+export default Register;

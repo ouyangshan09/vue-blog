@@ -4,10 +4,6 @@
  */
 import * as Utils from './infoUtils';
 
-const ERROR_CONSTANT = '未知';
-
-
-
 class TimeUtils {
 
     /**
@@ -71,27 +67,15 @@ class TimeUtils {
      * 1天=24小时=1440分钟=86400秒
      * @field day 天数
      * */
-    static calculateScheduledDayTime(day){
-        if(!Utils.isNull(day) && Utils.isNumber(day)){
-            return day * 24 * 60 * 60;
-        }else if(!Utils.isNull(day) && Utils.isNumber(parseInt(day))) {
-            const dayValue = parseInt(day);
-            return dayValue * 24 * 60 * 60;
-        }
-        return 0;
+    static calculateScheduledDayTimestamp(day){
+        return this.getTime() + Utils.calculateDayTemp(day);
     }
     /**
      * 获得指定时间戳,例如1个小时后的时间戳
      * @field hour 1小时=60分钟=3600秒
      * */
-    static calculateScheduledHourTime(hour){
-        if(!Utils.isNull(hour)){
-            const hourValue = Utils.isNumber(hour) ?  hour : parseInt(hour);
-            if(!isNaN(hourValue)){
-                return hourValue * 60;
-            }
-        }
-        return 0;
+    static calculateScheduledHourTimestamp(hour){
+        return this.getTime() + Utils.calculateHourTemp(hour);
     }
 }
-module.exports = TimeUtils;
+export default TimeUtils;

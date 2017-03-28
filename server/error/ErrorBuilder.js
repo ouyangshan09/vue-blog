@@ -58,5 +58,4 @@ class ExceptionBuilder {
     //     return new Exception(this.builder());
     // }
 }
-
-module.exports = ExceptionBuilder;
+export default ExceptionBuilder;

@@ -32,9 +32,30 @@ const isEmptyString = value => {
 const isEmptyArray = value => {
     return isArray(value) && value.length === 0;
 };
-
-
-module.exports = {
+/**
+ * 获得指定时间戳,例如30天后的日期时间戳
+ * 1天=24小时=1440分钟=86400秒
+ * @field day 天数
+ * */
+const calculateDayTemp = value => {
+    const day = parseInt(value);
+    if(isNumber(day) && !isNaN(day)){
+        return day * 24 * 60 * 60;
+    }
+    return 0;
+};
+/**
+ * 获得指定时间戳,例如1个小时后的时间戳
+ * @field hour 1小时=60分钟=3600秒
+ * */
+const calculateHourTemp = value => {
+    const hour = parseInt(value);
+    if(isNumber(hour) && !isNaN(hour)){
+        return hour * 60 * 60;
+    }
+    return 0;
+};
+export {
     isNull,
     isObject,
     isArray,
@@ -42,5 +63,7 @@ module.exports = {
     isString,
     isNumber,
     isEmptyString,
-    isEmptyArray
-};
+    isEmptyArray,
+    calculateDayTemp,
+    calculateHourTemp
+}

@@ -4,7 +4,7 @@
  * @author Ouyang
  * @version 1.0
  */
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const Name = 'User';
@@ -25,6 +25,7 @@ let User = Schema({
 });
 /**
  * 查询账号是否存在
+ *
  * Y: 则返回查询结果
  * N: 则返回null
  * */
@@ -54,22 +55,39 @@ User.methods.createAccount = function () {
 };
 /**
  * 创建帐号登录Token和持续时间
- * @field account 查询帐号
  * @field token 登录令牌
  * @field tokenTime 令牌持续时间
  * */
 User.methods.createAccountTokenAndTokenTime = function (token, expiresTime) {
     const model = this.model(User.getName());
     return new Promise((resolve, reject) => {
-        this.token = token;
-        this.tokenExpiresTime = expiresTime;
-        this.save((err, value) =>{
+        model.findByIdAndUpdate(this._id, {token: token, tokenExpiresTime: expiresTime}, {new: true}, function (err, value) {
+            if(err) reject(err);
+            resolve(value);
+        });
+        // this.token = token;
+        // this.tokenExpiresTime = expiresTime;
+        // this.save((err, value) =>{
+        //     if(err) reject(err);
+        //     resolve(value);
+        // });
+    });
+};
+/**
+ * 更新Token持续时间
+ * @field expires 时间戳,单位秒
+ * */
+User.methods.updateTokenExpires = function (expires) {
+    this.tokenExpiresTime = expires;
+    return new Promise((resolve, reject) => {
+        this.save((err, value) => {
             if(err) reject(err);
             resolve(value);
         });
     })
 };
-//虽然说curd是异步的，但回调中的数据还是上一次的，非最新
+
+//虽然说curd是异步的，但回调中的数据还是上一次的，非最新,已解决，{new: true}
 User.methods.updateTest2 = function (token, time) {
     const model = this.model(User.getName());
     return new Promise((resolve, reject) => {
@@ -92,14 +110,4 @@ User.methods.updateTest = function () {
 User.getName = function () {
     return Name;
 };
-module.exports = User;
-
-// var db = require('../db/dbConnection');
-//
-//
-// var User = db.model('User', {
-//     account: String,
-//     password: String
-// });
-//
-// module.exports = User;
+export default User;
