@@ -18,4 +18,12 @@ if(ENV === 'production'){
     console.log('testing');
 }
 
+//当前环境状态
+const getEnvironment = function () {
+    return ENV;
+};
+
+module.exports = {
+    getEnvironment
+};
 

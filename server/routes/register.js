@@ -2,23 +2,19 @@
  * Created by OUYANG on 2017/3/15.
  * 注册业务路由
  */
-import path from 'path';
-import fs from 'fs';
 import express from 'express';
 import ErrorBuilder from '../error/ErrorBuilder';
-import db from '../db/dbConnection';
-import User from '../model/User';
-import TimeUtils from '../utils/timeUtils';
-import * as InfoUtils from '../utils/infoUtils';
-import UUIDUtils from '../utils/uuidUtils';
-import {Base, Register } from '../constant';
+import * as Utils from '../utils/infoUtils';
+import {Base, Register} from '../constant';
+import UserApi from '../api/user.api';
+
 
 let router = express.Router();
+let userApi = new UserApi();
 
-
-//判断user对象是否存在,存在继续流程, 不存在则返回错误
-const userObj = function (request, response, next) {
-    if(InfoUtils.isNull(request.body.user)){
+//判断user对象是否存在,存在继续流程, 不存在则返回错误对象
+const verifyUserObj = function (request, response, next) {
+    if(Utils.isNull(request.body.user)){
         next(ErrorBuilder.create({
             code: Base.PARAMS_EXCEPTION.getCode(),
             info: Base.PARAMS_EXCEPTION.getInfo()
@@ -29,74 +25,65 @@ const userObj = function (request, response, next) {
 
 
 //拦截器
-router.use((req, res, next) => {
-    console.log('Time: ', TimeUtils.getFormatTime());
-    console.log('body: ', req.body);
-    next();
-});
+// router.use((req, res, next) => {
+//     console.log('Time: ', TimeUtils.getFormatTime());
+//     console.log('body: ', req.body);
+//     next();
+// });
 
-router.post('/register', userObj, (request, response, next) => {
+/**
+ * 注册业务逻辑路由处理
+ * */
+router.post('/register', verifyUserObj, (request, response, next) => {
     let {
         account,
         password,
     } = request.body.user;
-    if(InfoUtils.isNull(account) || InfoUtils.isNull(password)){
+    if(Utils.isNull(account) || Utils.isNull(password)){
         next(ErrorBuilder.create({
             code: Base.PARAMS_EXCEPTION.getCode(),
             info: Base.PARAMS_EXCEPTION.getInfo()
         }));
     }
-    const uuid = UUIDUtils.createUUID();
-    const createTime = TimeUtils.getTime();
-    let userModel = db.model(User.getName());
-    userModel.findOne({account: account}).exec(function (code, value) {
-        //查询不到数据则插入
-        if(InfoUtils.isNull(code) && InfoUtils.isNull(value)){
-            userModel.create({
-                id: uuid,
-                account: account,
-                password: password,
-                createTime: createTime
-            }).then(value => {
-                console.log('value2: ', value);
-            });
-        }
-    });
-
-    // userModel.findOne({
-    //     account: account
-    // }).then(value => {
-    //     if(InfoUtils.isNull(value)){
-    //         userModel.create({
-    //             id: id,
-    //             account: account,
-    //             password: password,
-    //             createTime: createTime
-    //         }).then(value => {
-    //             console.log("create value: ", value);
-    //         });
-    //     }
-    //     console.log('find: ', value);
-    // });
-    // userModel.find({account: account}).where('password').equals(password).exec((value, user) =>{
-    //     console.log('value: ', value);
-    //     console.log('user: ', user);
-    // });
-    // next(new Error(Base.LOGIN_OUT_OF_DATE.getCode()));
-    next();
-}, (req, res, next) => {
-    // console.log('next2');
-    res.send({
-        name: 'hello'
-    });
+    try {
+        userApi.findByAccountAfterCreateThat({
+            account: account,
+            password: password
+        }).then(data => {
+            if(!Utils.isNull(data)){
+                const info = {
+                    code: Register.SUCCESS.getCode(),
+                    info: Register.SUCCESS.getInfo(),
+                    data: data
+                };
+                response.json(info);
+            } else {
+                const info = {
+                    code: Register.EXIST.getCode(),
+                    info: Register.EXIST.getInfo()
+                };
+                response.json(info);
+            }
+        });
+    }catch (e){
+        next(ErrorBuilder.create({
+            code: Base.LOGIC_EXCEPTION.getCode(),
+            info: Base.LOGIC_EXCEPTION.getInfo()
+        }));
+    }
 });
-//业务错误处理
+/**
+ * 业务逻辑错误处理
+ * */
 router.use((err, req, res, next) => {
     console.log('error1: ', err);
-    res.send({
-        msg: "error"
-    });
+    const msg = err.getInfo() || '';
+    const code = err.getCode() || 0;
+    const error = {
+        msg: msg,
+        code: code
+    };
+    res.json(error);
 });
-
 
 module.exports = router;

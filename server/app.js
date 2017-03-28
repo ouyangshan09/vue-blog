@@ -6,12 +6,18 @@
  */
 require('babel-core/register');
 //环境配置
-require('./config');
+var config = require('./config');
+var morgan = require('morgan');
 var path = require('path');
 var express = require('express');
 var bodyParser = require('body-parser');
 var routes = require('./routes');
 var app = express();
+
+if(config.getEnvironment() === 'development' ||
+    config.getEnvironment() === 'production'){
+    app.use(morgan('dev'));
+}
 
 //注意，该中间件的顺序不要写错了，如果在router后面会造成请求无法解析参数
 app.use(bodyParser.urlencoded({ extended: true }));

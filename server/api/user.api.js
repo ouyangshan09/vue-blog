@@ -51,16 +51,16 @@ class UserApi {
         return await entity.findAccountIsExist();
     }
     /**
-     * 查询账号不存在则创建用户
+     * 查询账号, 不存在则创建用户
      * @field user -- Object {id: xx, account: xx, password: xx, createTime: xx}
      * */
     async findByAccountAfterCreateThat(user){
         const { account } = user;
         const result = await this.findByAccount(account);
-        if(!Utils.isNull(result)){
-            return null;
+        if(Utils.isNull(result)){
+            return await this.createAccount(user);
         }
-        return await this.createAccount(user);
+        return null;
     }
     /**
      * 创建用户Token和Token持续时间

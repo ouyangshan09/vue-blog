@@ -17,6 +17,7 @@ class BaseType {
 const Base = {
     PARAMS_EXCEPTION: new BaseType('参数异常', 100),
     LOGIN_OUT_OF_DATE: new BaseType('登陆过期,请重新登录', 101),
+    LOGIC_EXCEPTION: new BaseType('执行逻辑异常,中断执行任务', 103),
     NO_ACCESS: new BaseType('无权限', 150),
     NO_READ_ACCESS: new BaseType('无读取权限', 151),
     NO_WRITE_ACCESS: new BaseType('无写入权限', 152)
