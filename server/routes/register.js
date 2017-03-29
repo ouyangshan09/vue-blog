@@ -32,7 +32,6 @@ const verifyUserObj = function (request, response, next) {
  * */
 router.post('/register', verifyUserObj, (request, response, next) => {
     let {
-
         account,
         password,
     } = request.body.user;

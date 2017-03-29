@@ -37,13 +37,13 @@ router.post('/login', verifyUserObj, (request, response, next) => {
             expires: 1
         }).then(data => {
             if(Utils.isNull(data)){
-                //TODO 账号不存在信息
+                //账号不存在
                 response.json(new Response.NoExist());
             }else if(data.password === password + ""){
-                //TODO 符合条件
+                //符合条件
                 response.json(new Response.Success(data));
             }else{
-                //TODO 密码或其它错误
+                //密码或其它错误
                 response.json(new Response.PdError())
             }
             // console.log('data: ', data);
@@ -52,5 +52,13 @@ router.post('/login', verifyUserObj, (request, response, next) => {
         next(new Exception.Logic());
     }
 });
+/**
+ * 业务逻辑错误处理
+ * */
+router.use((err, req, res, next) => {
+    console.log('error1: ', err.stack);
+    res.json(err);
+});
+
 
 module.exports = router;

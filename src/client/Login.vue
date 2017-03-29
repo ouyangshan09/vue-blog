@@ -74,19 +74,27 @@
                     account: this.user.account,
                     password: this.user.password
                 }
+                this.loadObj.loading = true;
                 this.$refs['userForm'].validate(value => {
                     if(value){
                         this.$http.post('/api/login', {
                             user: userObj
                         }).then(res => res.json()).then(json => {
-                            
+                            if(json.code === 152){
+                                this.$router.push({path: '/manager'})
+                            }
                             console.log('client login: ', json);
+                            this.loadObj.loading = false;
+                        }).catch(error => {
+                            this.loadObj.loading = false;
                         });
                     }else {
                         console.log('exception');
+                        this.loadObj.loading = false;
                         return false;
                     }
                 });
+
             }
         },
     }
