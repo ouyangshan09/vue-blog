@@ -1,0 +1,21 @@
+@charset "UTF-8";
+@import "variable";
+
+//前端结构布局
+
+//顶部导航栏(用户信息, 导航)
+.oy-console--top{
+  width: 100%;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  background-color: $two-color;
+  border-radius: 4px;
+  .content{
+    height: 60px;
+  }
+}
+//侧边(左边)导航栏(功能导航)
+.oy-console--left{
+
+}

@@ -1,4 +1,5 @@
 @charset "UTF-8";
+@import "layout";
 @import "custom-component";
 
 #app {
@@ -22,4 +23,19 @@
   padding: 0;
   width: 100%;
   height: 100%;
+}
+//清除浮动样式
+.clearfix{
+  display: block;
+  &:after{
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+  }
+  &:before{
+    display: table;
+    content: ' ';
+  }
 }
