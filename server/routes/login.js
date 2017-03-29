@@ -8,6 +8,7 @@ import UserApi from '../api/user.api';
 import * as Response from '../responseObj/loginResponseType';
 import * as Utils from '../utils/infoUtils';
 import * as Exception from '../exception/oyException';
+import Base from '../constant/base';
 
 let router = express.Router();
 let userApi = new UserApi();
@@ -15,7 +16,8 @@ let userApi = new UserApi();
 //判断post请求user对象是否存在
 const verifyUserObj = (request, response, next) => {
     if(Utils.isNull(request.body.user)){
-        next(new Exception.Params());
+        // next(new Exception.Params());
+        next(Base.PARAMS_EXCEPTION);
         return;
     }
     next();
