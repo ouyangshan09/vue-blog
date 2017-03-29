@@ -5,5 +5,6 @@
 // require('./asyncExample.test');
 // require('./register.test');
 // require('./db-user.test.js');
-// import './userApi.test';
-import './response.test';
+import './userApi.test';
+// import './response.test';
+// import './exception.test';

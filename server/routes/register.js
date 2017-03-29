@@ -3,16 +3,10 @@
  * 注册业务路由
  */
 import express from 'express';
-import ErrorBuilder from '../error/ErrorBuilder';
 import * as Utils from '../utils/infoUtils';
-import {BaseType} from '../constant';
-import {
-    RegisterResponseExist,
-    RegisterResponseSuccess,
-    RegisterResponseFailure
-} from '../responseObj/registerResponseObj';
+import * as Register from '../responseObj/registerResponseType';
+import * as Exception from '../exception/oyException';
 import UserApi from '../api/user.api';
-
 
 let router = express.Router();
 let userApi = new UserApi();
@@ -20,14 +14,11 @@ let userApi = new UserApi();
 //判断user对象是否存在,存在继续流程, 不存在则返回错误对象
 const verifyUserObj = function (request, response, next) {
     if(Utils.isNull(request.body.user)){
-        next(ErrorBuilder.create({
-            code: BaseType.PARAMS_EXCEPTION.getCode(),
-            info: BaseType.PARAMS_EXCEPTION.getInfo()
-        }));
+        next(new Exception.Params());
+        return;
     }
     next();
 };
-
 
 //拦截器
 // router.use((req, res, next) => {
@@ -41,14 +32,13 @@ const verifyUserObj = function (request, response, next) {
  * */
 router.post('/register', verifyUserObj, (request, response, next) => {
     let {
+
         account,
         password,
     } = request.body.user;
-    if(Utils.isNull(account) || Utils.isNull(password)){
-        next(ErrorBuilder.create({
-            code: BaseType.PARAMS_EXCEPTION.getCode(),
-            info: BaseType.PARAMS_EXCEPTION.getInfo()
-        }));
+    if(Utils.isEmptyString(account) || Utils.isEmptyString(password)){
+        next(new Exception.Params());
+        return;
     }
     try {
         userApi.findByAccountAfterCreateThat({
@@ -56,30 +46,22 @@ router.post('/register', verifyUserObj, (request, response, next) => {
             password: password
         }).then(data => {
             if(!Utils.isNull(data)){
-                response.json(new RegisterResponseSuccess(data));
+                response.json(new Register.ResponseSuccess(data));
             }else {
-                response.json(new RegisterResponseExist());
+                response.json(new Register.ResponseExist());
             }
         });
     }catch (e){
-        next(ErrorBuilder.create({
-            code: BaseType.LOGIC_EXCEPTION.getCode(),
-            info: BaseType.LOGIC_EXCEPTION.getInfo()
-        }));
+        next(new Exception.Logic());
     }
 });
 /**
  * 业务逻辑错误处理
  * */
 router.use((err, req, res, next) => {
+    console.log('error1: ', err.stack);
     console.log('error1: ', err);
-    const msg = err.getInfo() || '';
-    const code = err.getCode() || 0;
-    const error = {
-        msg: msg,
-        code: code
-    };
-    res.json(error);
+    res.json(err);
 });
 
 module.exports = router;

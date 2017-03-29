@@ -2,7 +2,7 @@
  * Created by ouyangshan09 on 2017/3/28.
  * 响应返回对象基类
  */
-class BaseResponseObj{
+class BaseResponseType{
     constructor(){
         this.info = this.getInfo();
         this.code = this.getCode();
@@ -18,4 +18,4 @@ class BaseResponseObj{
         return null;
     }
 }
-export default BaseResponseObj;
+export default BaseResponseType;

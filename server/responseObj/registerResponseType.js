@@ -3,11 +3,11 @@
  * 注册业务逻辑 响应对象
  * @author Ouyang
  */
-import BaseResponseObj from './baseResponseObj';
+import BaseResponseType from './baseResponseType';
 import {RegisterType} from '../constant';
 
 /**注册成功响应对象*/
-class RegisterResponseSuccess extends BaseResponseObj{
+class ResponseSuccess extends BaseResponseType{
     constructor(){
         super();
         if(arguments && arguments.length > 0){
@@ -15,7 +15,7 @@ class RegisterResponseSuccess extends BaseResponseObj{
                 this.data = value;
             }
         }
-        Error.captureStackTrace(this, RegisterResponseSuccess);
+        // Error.captureStackTrace(this, ResponseSuccess);
     }
 
     getInfo() {
@@ -31,9 +31,8 @@ class RegisterResponseSuccess extends BaseResponseObj{
     }
 }
 
-
 /**注册失败响应对象*/
-class RegisterResponseFailure extends BaseResponseObj {
+class ResponseFailure extends BaseResponseType {
     constructor(){
         super();
         if(arguments && arguments.length > 0){
@@ -57,7 +56,7 @@ class RegisterResponseFailure extends BaseResponseObj {
 }
 
 /**帐号已存在响应对象*/
-class RegisterResponseExist extends BaseResponseObj {
+class ResponseExist extends BaseResponseType {
     constructor(){
         super();
         if(arguments && arguments.length > 0){
@@ -81,7 +80,7 @@ class RegisterResponseExist extends BaseResponseObj {
 }
 
 export {
-    RegisterResponseExist,
-    RegisterResponseSuccess,
-    RegisterResponseFailure,
+    ResponseExist,
+    ResponseSuccess,
+    ResponseFailure,
 };

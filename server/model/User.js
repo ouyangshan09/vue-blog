@@ -38,6 +38,22 @@ User.methods.findAccountIsExist = function () {
         });
     });
 };
+/**
+ * 查询账号和密码是否存在
+ *
+ * Y: 则返回查询结果
+ * N：返回null
+ * */
+User.methods.findAccountAndPassword = function () {
+    const model = this.model(User.getName);
+    return new Promise((resolve, reject) => {
+        model.findOne({account: this.account, password: this.password }).exec(function (err, value) {
+            if(err) reject(err);
+            resolve(value);
+        })
+    })
+};
+
 /**创建账号*/
 User.methods.createAccount = function () {
     const model = this.model(User.getName());

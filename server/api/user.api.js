@@ -63,14 +63,19 @@ class UserApi {
         return null;
     }
     /**
-     * 创建用户Token和Token持续时间
-     * @field obj -- Object {account: xx, expires: xx}
+     * 使用账号和密码查询, 并创建Token和Token持续时间
+     * @field obj -- Object {account: xx, password: xx expires: xx}
      * */
-    async createTokenAndExpires(obj){
-        const {account, expires = 1} = obj;
+    async findByAccountAndPasswordWitchCreateToken(obj){
+        const {account, password, expires = 1} = obj;
         const result = await this.findByAccount(account);
+        //查询不到账号
         if(Utils.isNull(result)){
             return null;
+        }
+        //查到了, 但密码不一致
+        if(result.password !== password + ""){
+            return result;
         }
         const privateKey = await FileUtils.readFile('./private.key');
         const token = UUIDUtils.createToken(result, privateKey);

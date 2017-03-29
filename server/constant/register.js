@@ -4,23 +4,11 @@
  * @author Ouyang
  * @version 1.0
  */
-
-class RegisterType {
-    constructor(info, code){
-        this.info = info;
-        this.code = code;
-    }
-    getInfo(){
-        return this.info;
-    }
-    getCode(){
-        return this.code;
-    }
-}
+import EnumType from './enumType';
 
 const Register = {
-    SUCCESS: new RegisterType('注册成功', 100),
-    FAILURE: new RegisterType('注册失败', 101),
-    EXIST: new RegisterType('帐号已存在', 102),
+    SUCCESS: new EnumType('注册成功', 100),
+    FAILURE: new EnumType('注册失败', 101),
+    EXIST: new EnumType('帐号已存在', 102),
 };
 export default Register;

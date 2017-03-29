@@ -6,7 +6,7 @@ import assert from 'assert';
 import UserApi from '../api/user.api';
 
 describe('用户接口测试', function () {
-    describe('updateTokenExpires', function () {
+    describe.skip('updateTokenExpires', function () {
         it('update result', function (done) {
             const userApi = new UserApi();
             try {
@@ -22,11 +22,11 @@ describe('用户接口测试', function () {
             }
         });
     });
-    describe.skip('createTokenAndExpires', function () {
+    describe.skip('findByAccountAndCreateToken', function () {
         it('account result', function (done) {
             const userApi = new UserApi();
             try {
-                userApi.createTokenAndExpires({
+                userApi.findByAccountAndCreateToken({
                     account: 'ouyangjun091',
                     expires: 1
                 }).then(data => {
@@ -54,11 +54,11 @@ describe('用户接口测试', function () {
             }
         });
     });
-    describe.skip('findByAccount', function () {
+    describe('findByAccount', function () {
         it('account result', function (done) {
             const userApi = new UserApi();
             try {
-                userApi.findByAccount('ouyangjun09').then(data => {
+                userApi.findByAccount('ouyangshan09').then(data => {
                     console.log('account result: ', data);
                     done();
                 });

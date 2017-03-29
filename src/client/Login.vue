@@ -78,11 +78,12 @@
                     if(value){
                         this.$http.post('/api/login', {
                             user: userObj
-                        }).then(res => {
-                            console.log('client login: ', res);
+                        }).then(res => res.json()).then(json => {
+                            
+                            console.log('client login: ', json);
                         });
                     }else {
-                        console.log('error submit');
+                        console.log('exception');
                         return false;
                     }
                 });

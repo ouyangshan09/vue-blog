@@ -6,7 +6,9 @@
 
 import BaseType from './base';
 import RegisterType from './register';
+import LoginType from './login';
 export {
     BaseType,
     RegisterType,
+    LoginType
 }
