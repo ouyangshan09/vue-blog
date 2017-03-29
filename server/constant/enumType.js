@@ -6,6 +6,7 @@ class EnumType {
     constructor(info, code){
         this.info = info;
         this.code = code;
+        // Error.captureStackTrace(this, EnumType);
     }
     getInfo(){
         return this.info;

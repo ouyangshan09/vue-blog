@@ -5,10 +5,9 @@
  */
 import express from 'express';
 import UserApi from '../api/user.api';
-import * as Response from '../responseObj/loginResponseType';
 import * as Utils from '../utils/infoUtils';
-import * as Exception from '../exception/oyException';
-import Base from '../constant/base';
+import LoginException from '../exception/loginException';
+import LoginResponse from '../responseObj/loginResponse';
 
 let router = express.Router();
 let userApi = new UserApi();
@@ -16,8 +15,7 @@ let userApi = new UserApi();
 //判断post请求user对象是否存在
 const verifyUserObj = (request, response, next) => {
     if(Utils.isNull(request.body.user)){
-        // next(new Exception.Params());
-        next(Base.PARAMS_EXCEPTION);
+        next(LoginException.USER_OBJ_PARAM);
         return;
     }
     next();
@@ -28,8 +26,14 @@ router.post('/login', verifyUserObj, (request, response, next) => {
         account,
         password
     } = request.body.user;
-    if(Utils.isEmptyString(account) || Utils.isEmptyString(password)){
-        next(new Exception.Params());
+    //帐号参数不存在
+    if(Utils.isEmptyString(account)){
+        next(LoginException.ACCOUNT_PARAM);
+        return;
+    }
+    //密码参数不存在
+    if(Utils.isEmptyString(password)){
+        next(LoginException.PASSWORD_PARAM);
         return;
     }
     try {
@@ -40,25 +44,23 @@ router.post('/login', verifyUserObj, (request, response, next) => {
         }).then(data => {
             if(Utils.isNull(data)){
                 //账号不存在
-                response.json(new Response.NoExist());
+                response.json(LoginException.NO_EXIST);
             }else if(data.password === password + ""){
                 //符合条件
-                response.json(new Response.Success(data));
+                response.json(new LoginResponse(data));
             }else{
                 //密码或其它错误
-                response.json(new Response.PdError())
+                response.json(LoginException.PASSWORD_ERROR);
             }
-            // console.log('data: ', data);
         });
     }catch (e){
-        next(new Exception.Logic());
+        next(LoginException.SQL_TASK_ERROR);
     }
 });
 /**
  * 业务逻辑错误处理
  * */
 router.use((err, req, res, next) => {
-    console.log('error1: ', err.stack);
     res.json(err);
 });
 

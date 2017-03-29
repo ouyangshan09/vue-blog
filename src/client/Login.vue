@@ -80,7 +80,7 @@
                         this.$http.post('/api/login', {
                             user: userObj
                         }).then(res => res.json()).then(json => {
-                            if(json.code === 152){
+                            if(json.code === 151){
                                 this.$router.push({path: '/manager'})
                             }
                             console.log('client login: ', json);
@@ -94,7 +94,6 @@
                         return false;
                     }
                 });
-
             }
         },
     }
