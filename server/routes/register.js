@@ -4,9 +4,9 @@
  */
 import express from 'express';
 import * as Utils from '../utils/infoUtils';
-import * as Register from '../responseObj/registerResponseType';
-import * as Exception from '../exception/oyException';
 import UserApi from '../api/user.api';
+import UserInfo from '../constant/userInfo';
+import BaseResultJSON from '../response/baseResultJSON';
 
 let router = express.Router();
 let userApi = new UserApi();
@@ -14,7 +14,7 @@ let userApi = new UserApi();
 //判断user对象是否存在,存在继续流程, 不存在则返回错误对象
 const verifyUserObj = function (request, response, next) {
     if(Utils.isNull(request.body.user)){
-        next(new Exception.Params());
+        next(new BaseResultJSON(UserInfo.USER_OBJ_PARAM));
         return;
     }
     next();
@@ -35,8 +35,12 @@ router.post('/register', verifyUserObj, (request, response, next) => {
         account,
         password,
     } = request.body.user;
-    if(Utils.isEmptyString(account) || Utils.isEmptyString(password)){
-        next(new Exception.Params());
+    if(Utils.isEmptyString(account)){
+        next(new BaseResultJSON(UserInfo.ACCOUNT_PARAM));
+        return;
+    }
+    if(Utils.isEmptyString(password)){
+        next(new BaseResultJSON(UserInfo.PASSWORD_PARAM));
         return;
     }
     try {
@@ -45,21 +49,19 @@ router.post('/register', verifyUserObj, (request, response, next) => {
             password: password
         }).then(data => {
             if(!Utils.isNull(data)){
-                response.json(new Register.ResponseSuccess(data));
+                response.json(new BaseResultJSON(UserInfo.REG_SUCCESS, data));
             }else {
-                response.json(new Register.ResponseExist());
+                response.json(new BaseResultJSON(UserInfo.EXIST));
             }
         });
     }catch (e){
-        next(new Exception.Logic());
+        response.json(new BaseResultJSON(UserInfo.SQL_TASK_ERROR));
     }
 });
 /**
  * 业务逻辑错误处理
  * */
 router.use((err, req, res, next) => {
-    console.log('error1: ', err.stack);
-    console.log('error1: ', err);
     res.json(err);
 });
 

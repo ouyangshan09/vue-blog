@@ -6,7 +6,7 @@ import {
     ResponseSuccess,
     ResponseFailure,
     ResponseExist,
-} from '../responseObj/registerResponseType';
+} from '../response/registerResponseType';
 
 describe('响应对象创建测试', function () {
     describe('register', function () {

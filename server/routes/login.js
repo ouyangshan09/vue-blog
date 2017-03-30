@@ -6,8 +6,8 @@
 import express from 'express';
 import UserApi from '../api/user.api';
 import * as Utils from '../utils/infoUtils';
-import LoginException from '../exception/loginException';
-import LoginResponse from '../responseObj/loginResponse';
+import UserInfo from '../constant/userInfo';
+import BaseResultJSON from '../response/baseResultJSON';
 
 let router = express.Router();
 let userApi = new UserApi();
@@ -15,7 +15,7 @@ let userApi = new UserApi();
 //判断post请求user对象是否存在
 const verifyUserObj = (request, response, next) => {
     if(Utils.isNull(request.body.user)){
-        next(LoginException.USER_OBJ_PARAM);
+        next(new BaseResultJSON(UserInfo.USER_OBJ_PARAM));
         return;
     }
     next();
@@ -28,12 +28,12 @@ router.post('/login', verifyUserObj, (request, response, next) => {
     } = request.body.user;
     //帐号参数不存在
     if(Utils.isEmptyString(account)){
-        next(LoginException.ACCOUNT_PARAM);
+        next(new BaseResultJSON(UserInfo.ACCOUNT_PARAM));
         return;
     }
     //密码参数不存在
     if(Utils.isEmptyString(password)){
-        next(LoginException.PASSWORD_PARAM);
+        next(new BaseResultJSON(UserInfo.PASSWORD_PARAM));
         return;
     }
     try {
@@ -44,17 +44,17 @@ router.post('/login', verifyUserObj, (request, response, next) => {
         }).then(data => {
             if(Utils.isNull(data)){
                 //账号不存在
-                response.json(LoginException.NO_EXIST);
+                response.json(new BaseResultJSON(UserInfo.NO_EXIST));
             }else if(data.password === password + ""){
                 //符合条件
-                response.json(new LoginResponse(data));
+                response.json(new BaseResultJSON(UserInfo.LOGIN_SUCCESS, data));
             }else{
                 //密码或其它错误
-                response.json(LoginException.PASSWORD_ERROR);
+                response.json(new BaseResultJSON(UserInfo.PASSWORD_ERROR));
             }
         });
     }catch (e){
-        next(LoginException.SQL_TASK_ERROR);
+        next(new BaseResultJSON(UserInfo.SQL_TASK_ERROR));
     }
 });
 /**
@@ -63,6 +63,5 @@ router.post('/login', verifyUserObj, (request, response, next) => {
 router.use((err, req, res, next) => {
     res.json(err);
 });
-
 
 module.exports = router;

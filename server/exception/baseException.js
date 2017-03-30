@@ -1,6 +1,7 @@
 /**
  * Created by OUYANG on 2017/3/29.
  * 错误基类
+ * 废弃 对象文件 by 2017/03/30
  */
 class BaseException {
     constructor(){

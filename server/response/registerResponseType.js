@@ -19,11 +19,11 @@ class ResponseSuccess extends BaseResponseType{
     }
 
     getInfo() {
-        return RegisterType.SUCCESS.getInfo();
+        return RegisterType.LOGIN_SUCCESS.getInfo();
     }
 
     getCode() {
-        return RegisterType.SUCCESS.getCode();
+        return RegisterType.LOGIN_SUCCESS.getCode();
     }
 
     getData() {

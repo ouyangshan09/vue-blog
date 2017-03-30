@@ -2,6 +2,7 @@
  * Created by OUYANG on 2017/3/29.
  * 基本业务逻辑异常信息对象
  * @author Ouyang
+ * 废弃 对象文件 by 2017/03/30
  */
 import {BaseType} from '../constant';
 import BaseException from './baseException';
