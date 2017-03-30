@@ -29,6 +29,22 @@
     import Title from '../component/title';
     import User from '../entity/user';
 
+    var name2 = 'world';
+    var name = 'World!';
+    (function () {
+        // console.log('name1: ', typeof name);
+        // console.log('name2: ', typeof name2);
+        if (typeof name2 === 'undefined') {
+            var name = 'Jack';
+            var name2 = 'Ouyang';
+            console.log('Goodbye ' + name2);
+            console.log(typeof name2);
+        } else {
+            console.log('Hello ' + name2);
+        }
+    })();
+    
+    
     export default {
         components: {
             'title-component': Title
@@ -75,20 +91,19 @@
                     password: this.user.password
                 }
                 this.loadObj.loading = true;
-                this.$http.post('/api/login', {
-                    user: userObj
-                }).then(res => res.json()).then(json => {
-                    if(json.code === 151){
-                        this.$router.push({path: '/manager'})
-                    }
-                    console.log('client login: ', json);
-                    this.loadObj.loading = false;
-                }).catch(error => {
-                    this.loadObj.loading = false;
-                });
                 this.$refs['userForm'].validate(value => {
                     if(value){
-                        
+                        this.$http.post('/api/login', {
+                            user: userObj
+                        }).then(res => res.json()).then(json => {
+                            if(json.code === 151){
+                                this.$router.push({path: '/manager'})
+                            }
+                            console.log('client login: ', json);
+                            this.loadObj.loading = false;
+                        }).catch(error => {
+                            this.loadObj.loading = false;
+                        });
                     }else {
                         console.log('exception');
                         this.loadObj.loading = false;

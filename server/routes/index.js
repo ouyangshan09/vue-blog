@@ -9,6 +9,7 @@ class Router{
         app.use('/api', require('./login'));
         app.use('/api', require('./register'));
         app.use('/api', require('./upload'));
+        // app.use('/api', require('./menu'));
     }
 
     //创建
