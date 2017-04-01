@@ -140,10 +140,10 @@
                         this.$http.post('/api/login', {
                             user: userObj
                         }).then(res => res.json()).then(json => {
-                            if(json.code === 151){
-                                this.$router.push({path: '/manager'})
-                            }
-                            console.log('client login: ', json);
+                            // if(json.code === 151){
+                            //     this.$router.push({path: '/manager'})
+                            // }
+                            // console.log('client login: ', json);
                             this.loadObj.loading = false;
                         }).catch(error => {
                             this.loadObj.loading = false;

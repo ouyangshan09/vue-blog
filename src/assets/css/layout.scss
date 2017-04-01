@@ -11,11 +11,57 @@
   padding: 0;
   //background-color: $two-color;
   border-radius: 4px;
-  .content{
+  .nav-path{
     height: 60px;
+    display: inline-block;
+  }
+  .logo{
+    display: block;
+    height: 60px;
+    line-height: 60px;
   }
 }
 //侧边(左边)导航栏(功能导航)
 .oy-console--left{
 
+}
+
+//后台登录Login模块样式
+.login-form{
+  position: relative;
+  width: 400px;
+  margin: 124px auto 0;
+  padding: 24px;
+  //border: 1px solid rgba(130, 199, 235, 0.6);
+  //box-shadow: -2px 3px 38px 3px #82C7EB;
+}
+//后台注册Reg模块样式
+.register-form{
+  position: relative;
+  width: 400px;
+  margin: 124px auto 0;
+  padding: 24px;
+}
+.edit-area{
+  font-size: inherit;
+  border: 1px solid #bfcbd9;
+  display: block;
+  color: #1f2d3d;
+  width: 100%;
+  text-align: left;
+  height: auto;
+  min-height: 36px;
+  line-height: 36px;
+  outline: 0;
+  padding: 0 10px;
+  border-radius: 4px;
+  -webkit-appearance: none;
+  background-image: none;
+  background-color: #fff;
+  box-sizing: border-box;
+  div{
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+  }
 }
