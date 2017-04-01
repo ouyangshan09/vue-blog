@@ -69,6 +69,7 @@ Singleton.getInstance = (function() {
     }
 })();
 
+//工厂模式
 function createPerson(name, age, sex) {
     let obj = Object.create({});
     obj.name = name;
@@ -76,7 +77,7 @@ function createPerson(name, age, sex) {
     obj.sex = sex;
     return obj;
 }
-
+//复杂工厂模式-ES6
 class ByShop {
     constructor(name){
         this.name = name;
@@ -114,6 +115,7 @@ class ByChild extends ByShop{
     }
 }
 
+//复杂工厂模式-
 // 定义自行车的构造函数
 var BicycleShop = function(name){
     this.name = name;
