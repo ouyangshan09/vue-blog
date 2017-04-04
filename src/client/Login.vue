@@ -29,66 +29,6 @@
     import Title from '../component/title';
     import User from '../entity/user';
 
-    var name2 = 'world';
-    var name = 'World!';
-    (function () {
-        // console.log('name1: ', typeof name);
-        // console.log('name2: ', typeof name2);
-        if (typeof name2 === 'undefined') {
-            var name = 'Jack';
-            var name2 = 'Ouyang';
-            console.log('Goodbye ' + name2);
-            console.log(typeof name2);
-        } else {
-            console.log('Hello ' + name2);
-        }
-    })();
-    
-    // function mul(x) {
-    //     const result = y => mul(x * y);
-    //     result.valueOf = () => x;
-    //     return result;
-    // }
-    // console.log('mul: ',mul(3));
-
-    //快速排序
-    var quickSort = function(arr) {
-        if (arr.length <= 1) { return arr; }
-        var pivotIndex = Math.floor(arr.length / 2);
-        var pivot = arr.splice(pivotIndex, 1)[0];
-        var left = [];
-        var right = [];
-        for (var i = 0; i < arr.length; i++){
-            if (arr[i] < pivot) {
-                left.push(arr[i]);
-            } else {
-                right.push(arr[i]);
-            }
-        }
-        return quickSort(left).concat([pivot], quickSort(right));
-    };
-    console.log(quickSort([3,4,5,6,9,11,23,2]));
-
-    //二分查找
-    function binary_search(arr, key) {
-        let low = 0,
-          high = arr.length - 1;
-        while(low <= high){
-            let mid = parseInt((high + low) / 2);
-            if(key == arr[mid]){
-                return  mid;
-            }else if(key > arr[mid]){
-                low = mid + 1;
-            }else if(key < arr[mid]){
-                high = mid -1;
-            }else{
-                return -1;
-            }
-        }
-    };
-    var arr = [1,2,3,4,5,6,7,8,9,10,11,23,44,86];
-    console.log('binary: ', binary_search(arr,10));
-    
     export default {
         components: {
             'title-component': Title

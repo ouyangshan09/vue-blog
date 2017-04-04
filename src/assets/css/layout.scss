@@ -9,21 +9,25 @@
   position: relative;
   margin: 0;
   padding: 0;
-  //background-color: $two-color;
   border-radius: 4px;
   .nav-path{
     height: 60px;
-    display: inline-block;
+    padding-left: 55px;
+    //float: left;
+    //设置inline-block 会导致父元素意外增加高度,解决方法是添加vertical-align: bottom 属性,具体方法可以参考笔记
+    //display: inline-block;
+    //vertical-align: bottom;
   }
   .logo{
-    display: block;
+    position: absolute;
+    left: 0;
     height: 60px;
     line-height: 60px;
   }
 }
 //侧边(左边)导航栏(功能导航)
 .oy-console--left{
-
+  height: 60px;
 }
 
 //后台登录Login模块样式

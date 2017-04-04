@@ -3,13 +3,12 @@
     <div class="container">
         <nav class="oy-console--top">
             <section class="nav-path">
+                <aside class="logo">LOGO</aside>
                 <ul class="oy-menu oy-menu--dark clearfix">
                     <li class="oy-menu-item">控制台</li>
                     <li class="oy-menu-item">博客地址</li>
+                    <li class="oy-menu-item oy-menu-item--right">icon + 帐号 + 退出</li>
                 </ul>
-            </section>
-            <section class="nav-path">
-                <ul class="oy-menu clearfix"></ul>
             </section>
             <!--<el-row class="content">-->
                 <!--<el-col :md="1" class="el-menu&#45;&#45;dark"><span class="logo"><i style="color:#20a0ff">LOGO</i></span></el-col>-->
@@ -36,6 +35,42 @@
         <div class="oy-console--left"></div>
     </div>
 </template>
-<script></script>
+<script type="es6">
+    export default {
+
+    }
+    class Parent{
+        constructor(name, age){
+            this.name = name;
+            this.age = age;
+            this.parentMethod = function () {
+                return 'parent';
+            };
+        }
+        say(){
+            return this.name + '-parent';
+        }
+    }
+    class Sub extends Parent{
+        constructor(name, age){
+            super(name, age);
+            this.subMethod = function () {
+                return 'sub';
+            };
+        }
+        subSay(){
+            return this.name + '-sub';
+        }
+        // say(){
+        //     return this.name + '-sub';
+        // }
+        static staticSay(){
+            return 'static';
+        }
+    }
+    let sub = new Sub('ouyang', 23);
+    console.log("sub instace: ", sub);
+    console.log("sub instace.staticSay: ", sub.say());
+</script>
 <style lang="scss">
 </style>
