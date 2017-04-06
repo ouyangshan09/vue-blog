@@ -6,7 +6,7 @@
     "dev": "webpack-dev-server --config ./build/webpack.dev.conf.js -d",
     "dev-hot": "node build/dev-server.js",
     "service": "set NODE_ENV=production&& node ./server/app.js",
-    "service-hot": "set NODE_ENV=development&& supervisor ./server/app.js",
+    "service-hot": "set NODE_ENV=development&& supervisor --harmony ./server/app.js",
     "build": "node build/build.js",
     "bundle": "webpack --progress --colors --config ./build/webpack.dll.conf.js",
     "bundle2": "node build/dll-bundle.js",
