@@ -10,4 +10,5 @@
 // import './exception.test';
 // import './login.test';
 // import './register.test';
-import './design.test';
+// import './design.test';
+import './design2.test';
