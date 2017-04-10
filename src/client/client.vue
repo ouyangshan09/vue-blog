@@ -11,7 +11,8 @@
 <script type="es6">
     
     import {DataType} from '../utils';
-    
+    import {ListType} from '../utils/listType';
+
     export default {
         data(){
             return {
@@ -34,8 +35,22 @@
         },
         created(){
             const obj = this.getTree(this.regions);
-            console.log('map: ', DataType.parseJson(obj.map));
-            console.log('tree: ', DataType.parseJson(obj.tree));
+            obj.map[1] = "";
+            // console.log('map: ', DataType.parseJson(obj.map));
+            // console.log('tree: ', DataType.parseJson(obj.tree));
+            const map = new Map();
+            const list = new ListType();
+            list.append('test1');
+            list.append('test2');
+            list.append('test3');
+            list.remove('test2');
+            list.insert('test12', 'test1');
+            list.next();
+            map.set({'key': 'ouyang'}, 'value');
+            map.set('key', 'value2');
+            console.log("new Map: ", map);
+            console.log("new List: ", list.currentPos());
+
         },
         computed: {
 
@@ -48,17 +63,19 @@
                 }, {});
                 const tree = [];
                 arr.forEach(region => {
-                    if(region.parent){
-                        const parent = map[region.parent];
-                        if(!parent.children){
-                            parent.children = [region];
-                        }else {
-                            parent.children.push(region);
+                    if (region.parent) {
+                        const parent = map[region.parent]
+                        if (!parent.children) {
+                            parent.children = [region]
                         }
-                    }else {
-                        tree.push(region);
+                        else {
+                            parent.children.push(region)
+                        }
                     }
-                });
+                    else {
+                        tree.push(region)
+                    }
+                })
                 return {map, tree};
             }
         }
