@@ -7,14 +7,14 @@ import TimeUtils from './timeUtils';
 import AuthorityUtils from './authorityUtils';
 
 const BooleanUtils = {
-    transformToNumber: DataType.transformToNumber
+    transformToNumber: DataType.toNumber
 };
 const NumberUtils = {
-    transformToBoolean: DataType.transformToBoolean
+    transformToBoolean: DataType.toBoolean
 };
 const ObjectUtils = {
-    transformToString: DataType.transformToString,
-    parseJson: DataType.parseJson
+    transformToString: DataType.toString,
+    parseJson: DataType.toJson
 };
 const StringUtils = {
     isEmpty: DataType.isEmptyString
@@ -22,8 +22,6 @@ const StringUtils = {
 const ArrayUtils = {
     isEmpty: DataType.isEmptyArray
 };
-
-
 
 export {
     BooleanUtils,

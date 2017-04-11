@@ -10,34 +10,27 @@
                     <li class="oy-menu-item oy-menu-item--right">icon + 帐号 + 退出</li>
                 </ul>
             </section>
-            <!--<el-row class="content">-->
-                <!--<el-col :md="1" class="el-menu&#45;&#45;dark"><span class="logo"><i style="color:#20a0ff">LOGO</i></span></el-col>-->
-                <!--<el-col :md="20">-->
-                    <!--<el-menu theme="dark" mode="horizontal">-->
-                        <!--<el-menu-item index="1">工作台</el-menu-item>-->
-                        <!--<el-menu-item index="2">博客地址</el-menu-item>-->
-                    <!--</el-menu>-->
-                <!--</el-col>-->
-                <!--<el-col :md="3">-->
-                    <!--<div class="oy-user-icon clearfix">-->
-                        <!--<div class="oy-user1">-->
-                            <!--<span class="oy-use1__icon"></span>-->
-                        <!--</div>-->
-                        <!--<div class="oy-user2">-->
-                            <!--<span class="oy-user2__icon">ouyang@qq.com</span>-->
-                        <!--</div>-->
-                        <!--&lt;!&ndash;<div class="oy-icon oy-icon__inner"></div>&ndash;&gt;-->
-                        <!--&lt;!&ndash;<div class="oy-icon oy-icon__msg">ouyang@gmail.com</div>&ndash;&gt;-->
-                    <!--</div>-->
-                <!--</el-col>-->
-            <!--</el-row>-->
         </nav>
-        <div class="oy-console--left"></div>
+        <div class="oy-console--left">
+						<ul class="oy-menu clearfix">
+							<li class="oy-menu-item">菜单按钮1</li>
+							<li class="oy-menu-item">菜单按钮2</li>
+							<li class="oy-menu-item">菜单按钮3</li>
+							<li class="oy-menu-item">菜单按钮4</li>
+						</ul>
+				</div>
+				<div class="oy-console--center">
+						<router-view></router-view>
+				</div>
     </div>
 </template>
 <script type="es6">
     export default {
-
+    		data(){
+    		    return {
+    		        
+						}
+				}
     }
     class Parent{
         constructor(name, age){
@@ -68,9 +61,5 @@
             return 'static';
         }
     }
-    let sub = new Sub('ouyang', 23);
-    console.log("sub instace: ", sub);
-    console.log("sub instace.staticSay: ", sub.say());
 </script>
-<style lang="scss">
-</style>
+<style lang="scss"></style>

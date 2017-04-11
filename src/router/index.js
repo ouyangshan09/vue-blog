@@ -11,7 +11,8 @@ import Client from '../client/client.vue';
 import Login from '../client/Login.vue';
 import Register from '../client/Register.vue';
 import Manager from '../client/Manager.vue';
-import Home from '../client/home.vue';
+import List from '../client/List.vue';
+import HomeTest from '../client/homeTest.vue';
 import NotFound from '../component/NotFound.vue';
 import DevComponent from '../client/DevComponent.vue';
 
@@ -23,11 +24,11 @@ export default new Router({
         //客户端路由访问
         {
             path: '/',
-            name: 'Home',
+            name: 'HomeTest',
             component: Client,
             children: [
                 {path: '', redirect: 'home'},
-                {path: 'home', component: Home},
+                {path: 'home', component: HomeTest},
             ]
         },
         //后台管理登录路由
@@ -46,7 +47,12 @@ export default new Router({
         {
             path: '/manager',
             name: 'Manager',
-            component: Manager
+            component: Manager,
+            children: [
+                {path: '', redirect: 'list'},
+                {path: 'list', component: List},
+                {path: 'list/:id', component: List}
+            ]
         },
         //组件测试开发
         {
