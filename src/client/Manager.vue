@@ -11,27 +11,31 @@
                 </ul>
             </section>
         </nav>
-        <div class="oy-console--left">
-						<ul class="oy-menu clearfix">
-							<li class="oy-menu-item">菜单按钮1</li>
-							<li class="oy-menu-item">菜单按钮2</li>
-							<li class="oy-menu-item">菜单按钮3</li>
-							<li class="oy-menu-item">菜单按钮4</li>
-						</ul>
-				</div>
-				<div class="oy-console--center">
-						<router-view></router-view>
-				</div>
+        <nav class="oy-console--left">
+            <ul class="oy-menu clearfix">
+                <li class="oy-menu-item">菜单按钮1</li>
+                <li class="oy-menu-item">菜单按钮2</li>
+                <li class="oy-menu-item">菜单按钮3</li>
+                <li class="oy-menu-item">菜单按钮4</li>
+            </ul>
+        </nav>
+        <section class="oy-console--center">
+            <router-view></router-view>
+        </section>
     </div>
 </template>
 <script type="es6">
+
+
     export default {
-    		data(){
-    		    return {
-    		        
-						}
-				}
+        name: 'Manager',
+        data(){
+            return {
+
+            }
+        }
     }
+
     class Parent{
         constructor(name, age){
             this.name = name;

@@ -59,6 +59,41 @@
   color: #fff;
 }
 //文章项目
+.oy-article{
+  position: relative;
+  //min-width: 150px;
+  padding: 4px 8px;
+  margin: 6px 0;
+  background-color: $white-bg;
+  border-left: 4px solid $blue-border;
+}
+.oy-article__title{
+  position: relative;
+  width: 100%;
+  font-size: 20px;
+  //字符串缩进样式
+}
+.oy-article__content{
+  position: relative;
+  width: 100%;
+  font-size: 14px;
+  //颜色改变 最好和title有对比
+}
+.oy-article__lastdate{
+  font-size: 12px;
+  //颜色改变，属于次级信息
+}
+.oy-article__author{
+  font-size: 12px;
+}
+//内容
+.oy-article-content{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  //height: 100%;
+  overflow: hidden;
+}
 
 //菜单
 .oy-menu{

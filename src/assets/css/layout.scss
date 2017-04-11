@@ -11,6 +11,7 @@
   padding: 0;
   border-radius: 4px;
   .nav-path{
+    min-width: 980px;
     height: 60px;
     padding-left: 55px;
     //float: left;
@@ -43,6 +44,31 @@
   height: 100%;
   overflow: hidden;
   background-color: $gray-bg;
+}
+
+.article{
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+//文章列表
+.article-list{
+  position: relative;
+  width: 180px;
+  margin: 0 6px;
+}
+//文章内容
+.article-content{
+  height: 100%;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 180px;
+  padding: 0 0 0 12px;
+  width: 100%;
+}
+.article-pos{
+  float: left;
 }
 
 //后台登录Login模块样式
