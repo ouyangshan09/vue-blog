@@ -65,19 +65,41 @@
   padding: 4px 8px;
   margin: 6px 0;
   background-color: $white-bg;
-  border-left: 4px solid $blue-border;
+  border-left: 4px solid $white-bg;
+  transition: border-left .2s linear;
+  cursor: pointer;
+  //禁止复制
+  user-select: none;
+  &:hover{
+    border-left: 4px solid $blue-border;
+  }
+  &.is--select{
+    border-left: 4px solid $blue-border;
+  }
+}
+.oy-article__omit{
+  //超过宽度隐藏
+  overflow: hidden;
+  //限制一行显示
+  white-space: nowrap;
+  //显示省略样式
+  text-overflow: ellipsis;
 }
 .oy-article__title{
   position: relative;
   width: 100%;
   font-size: 20px;
-  //字符串缩进样式
 }
 .oy-article__content{
   position: relative;
   width: 100%;
+  height: 65px;
   font-size: 14px;
   //颜色改变 最好和title有对比
+}
+.is--inline{
+  display: inline-block;
+  width: 48%;
 }
 .oy-article__lastdate{
   font-size: 12px;

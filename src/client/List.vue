@@ -1,17 +1,17 @@
 <template>
 	<div class="clearfix article">
 		<nav class="article-list">
-			<div class="oy-article">
-				<div class="oy-article__title">标题</div>
-				<div class="oy-article__content">内容</div>
-				<div class="oy-article__lastdate">时间</div>
-				<div class="oy-article__author">作者</div>
+			<div class="oy-article is--select">
+				<div class="oy-article__title oy-article__omit">标题1231标题111112标题13111</div>
+				<div class="oy-article__content">内容内容内123123容1内12312312</div>
+				<div class="oy-article__lastdate is--inline oy-article__omit">2017-04-13</div>
+				<div class="oy-article__author is--inline oy-article__omit">Ouyang</div>
 			</div>
 			<div class="oy-article">
-				<div class="oy-article__title">标题</div>
-				<div class="oy-article__content">内容</div>
-				<div class="oy-article__lastdate">时间</div>
-				<div class="oy-article__author">作者</div>
+				<div class="oy-article__title oy-article__omit">标题1231标题111112标题13111</div>
+				<div class="oy-article__content">内容内容内123123容1内12312312</div>
+				<div class="oy-article__lastdate is--inline oy-article__omit">2017-04-13</div>
+				<div class="oy-article__author is--inline oy-article__omit">Ouyang</div>
 			</div>
 		</nav>
 		<section class="article-content">
