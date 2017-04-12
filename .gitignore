@@ -7,3 +7,4 @@ test/e2e/
 lib/
 #git上传时，过滤文件名
 npm-debug.log
+debug.log
