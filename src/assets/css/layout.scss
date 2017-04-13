@@ -57,7 +57,7 @@
 }
 
 .article{
-  padding-left: $article_width;
+  //padding-left: $article_width;
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -71,16 +71,19 @@
   overflow-y: auto;
   overflow-x: hidden;
   width: $article_width;
-  position: absolute;
+  float: left;
+  //position: absolute;
   left: 0;
   border-right: 1px solid #ececec;
   height: 100%;
 }
 //文章内容
 .article-content{
-  position: relative;
-  top: 0;
-  left: 0;
+  overflow: auto;
+  height: 100%;
+  //position: relative;
+  //top: 0;
+  //left: 0;
   //min-width: 980px;
   //right: 0;
   //bottom: 0;
