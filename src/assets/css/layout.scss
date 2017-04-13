@@ -53,19 +53,21 @@
 }
 //文章列表
 .article-list{
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: $article_width;
   position: relative;
-  width: 180px;
-  margin: 0 6px;
+  border-right: 1px solid #ececec;
+  height: 100%;
 }
 //文章内容
 .article-content{
-  height: 100%;
-  overflow: hidden;
   position: absolute;
   top: 0;
-  left: 180px;
-  padding: 0 0 0 12px;
+  left: $article_width;
+  height: 100%;
   width: 100%;
+
 }
 .article-pos{
   float: left;
@@ -109,4 +111,12 @@
     padding: 0;
     line-height: 1;
   }
+}
+
+::-webkit-scrollbar{
+  width: 4px;
+}
+::-webkit-scrollbar-thumb{
+  background-color: #808080;
+  -webkit-border-radius: 12px;
 }

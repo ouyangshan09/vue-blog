@@ -1,41 +1,69 @@
 <template>
 	<div class="clearfix article">
-		<nav class="article-list">
-			<div class="oy-article is--select">
-				<div class="oy-article__title oy-article__omit">标题1231标题111112标题13111</div>
-				<div class="oy-article__content">内容内容内123123容1内12312312</div>
-				<div class="oy-article__lastdate is--inline oy-article__omit">2017-04-13</div>
-				<div class="oy-article__author is--inline oy-article__omit">Ouyang</div>
-			</div>
-			<div class="oy-article">
-				<div class="oy-article__title oy-article__omit">标题1231标题111112标题13111</div>
-				<div class="oy-article__content">内容内容内123123容1内12312312</div>
-				<div class="oy-article__lastdate is--inline oy-article__omit">2017-04-13</div>
-				<div class="oy-article__author is--inline oy-article__omit">Ouyang</div>
-			</div>
-		</nav>
+		<!--文章列表-->
+		<aside class="article-list">
+			<list @select="handleArticleList">
+				<list-item index="1" title="标题1" content="内容1" last-date="2017-04-13" author="欧阳"></list-item>
+				<list-item index="2"></list-item>
+				<list-item index="3"></list-item>
+				<list-item index="4"></list-item>
+				<list-item index="5"></list-item>
+				<list-item index="6"></list-item>
+				<list-item index="7"></list-item>
+				<list-item index="8"></list-item>
+			</list>
+		</aside>
 		<section class="article-content">
 			<div class="oy-article-content">
-				<span>文章内容</span>
+				<!--编辑内容-->
+				<textarea id="editor" style=""></textarea>
 			</div>
 		</section>
 	</div>
 </template>
 <script type="es6">
 	
+	import 'simplemde/dist/simplemde.min.css';
+	import {List, ListItem} from '../component/list';
+	import SimpleMDE from 'simplemde';
+	
 	export default {
-    data(){
-        return {
-            
-				}
+		data(){
+			return {
+			    simpleMD: "",
+			}
 		},
 		created(){
-		    const params = this.$route.params;
-				const id = params.id;
-				console.log(id);
+			const params = this.$route.params;
+			const id = params.id;
+			console.log(id);
+		},
+		beforeDestroy(){
+			let editor = document.getElementById('editor');
+			editor.outerHTML = editor.outerHTML;
+		},
+		mounted(){
+				this.$nextTick(() => {
+					this.simpleMD = new SimpleMDE({
+						initialValue: "初始化",
+						autoDownloadFontAwesome: true,
+						element: document.querySelector('#editor'),
+						previewRender: function (text) {
+							console.log('text: ', text);
+						},
+						spellChecker: false,
+					});
+				});
+		},
+		methods: {
+			handleArticleList(index, item){
+			    console.log('item: ', item);
+				//TODO 获得id -> 获得文章内容 -> 填充编辑组件
+			}
 		},
 		components: {
-		    
+			List,
+			ListItem
 		}
 	}
 </script>
