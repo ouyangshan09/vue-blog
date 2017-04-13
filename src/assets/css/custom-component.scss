@@ -148,12 +148,10 @@
 //内容
 .oy-article-content{
   position: relative;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
+  //width: 100%;
   //height: 100%;
-  //overflow-x: hidden;
-  //overflow-y: hidden;
+  //overflow: hidden;
+  //overflow-y: auto;
 }
 
 //菜单

@@ -1,22 +1,16 @@
 <template>
-	<div class="clearfix article">
+	<div class="article">
 		<!--文章列表-->
 		<aside class="article-list">
-			<list @select="handleArticleList">
-				<list-item index="1" title="标题1" content="内容1" last-date="2017-04-13" author="欧阳"></list-item>
-				<list-item index="2"></list-item>
-				<list-item index="3"></list-item>
-				<list-item index="4"></list-item>
-				<list-item index="5"></list-item>
-				<list-item index="6"></list-item>
-				<list-item index="7"></list-item>
-				<list-item index="8"></list-item>
+			<list @select="handleArticleList" style="padding-bottom: 60px">
+				<list-item index="-1" title="标题1" content="内容1" last-date="2017-04-13" author="欧阳"></list-item>
+				<list-item v-for="o in 10" :index="o + ''" key="o"></list-item>
 			</list>
 		</aside>
 		<section class="article-content">
 			<div class="oy-article-content">
 				<!--编辑内容-->
-				<textarea id="editor" style=""></textarea>
+				<textarea id="editor" style="opacity: 0"></textarea>
 			</div>
 		</section>
 	</div>

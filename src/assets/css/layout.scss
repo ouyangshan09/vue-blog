@@ -30,44 +30,64 @@
 .oy-console--left{
   position: relative;
   height: 100%;
-  width: 120px;
-  padding: 0 12px;
+  padding-left: 120px + 24px;
+  //width: 120px;
+  //padding: 0 12px;
   .nav-path{
 
   }
 }
-.oy-console--center{
+.oy-console--menu{
+  width: 120px;
+  padding: 0 12px;
   position: absolute;
-  left: 144px;
-  top: 60px;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  background-color: $gray-bg;
+  left: 0;
+  top: 0;
+}
+.oy-console--center{
+  //position: absolute;
+  //left: 144px;
+  //top: 60px;
+  //width: 100%;
+  //height: 100%;
+  //overflow: hidden;
+  //background-color: $gray-bg;
+  //position: relative;
+
 }
 
 .article{
+  padding-left: $article_width;
   width: 100%;
   height: 100%;
   overflow: hidden;
+  position: relative;
+  top: 0;
+  left: 0;
+  margin: 0;
 }
 //文章列表
 .article-list{
   overflow-y: auto;
   overflow-x: hidden;
   width: $article_width;
-  position: relative;
+  position: absolute;
+  left: 0;
   border-right: 1px solid #ececec;
   height: 100%;
 }
 //文章内容
 .article-content{
-  position: absolute;
+  position: relative;
   top: 0;
-  left: $article_width;
-  height: 100%;
-  width: 100%;
-
+  left: 0;
+  //min-width: 980px;
+  //right: 0;
+  //bottom: 0;
+  //width: 800px;
+  //height: 100%;
+  //overflow: hidden;
+  //overflow-y: auto;
 }
 .article-pos{
   float: left;
