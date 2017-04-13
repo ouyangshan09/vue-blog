@@ -12,7 +12,7 @@
   border-radius: 4px;
   .nav-path{
     min-width: 980px;
-    height: 60px;
+    height: $nav-menu_height;
     padding-left: 55px;
     //float: left;
     //设置inline-block 会导致父元素意外增加高度,解决方法是添加vertical-align: bottom 属性,具体方法可以参考笔记
@@ -26,18 +26,24 @@
     line-height: 60px;
   }
 }
+//菜单
+.oy-console--menu{
+  width: 120px;
+  padding: 0 12px;
+}
 //侧边(左边)导航栏(功能导航)
 .oy-console--left{
   position: relative;
   height: 100%;
   width: 120px;
-  padding: 0 12px;
+  padding: 0 11px 0 12px;
+  border-right: 1px solid #ececec;
   .nav-path{
 
   }
 }
 .oy-console--center{
-  position: absolute;
+  position: fixed;
   left: 144px;
   top: 60px;
   width: 100%;
@@ -65,9 +71,12 @@
   position: absolute;
   top: 0;
   left: $article_width;
-  height: 100%;
   width: 100%;
-
+  height: 100%;
+  //min-height: 460px;
+  overflow: hidden;
+  overflow-y: auto;
+  word-wrap: break-word;
 }
 .article-pos{
   float: left;
