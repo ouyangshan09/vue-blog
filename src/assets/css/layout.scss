@@ -33,27 +33,28 @@
 }
 //侧边(左边)导航栏(功能导航)
 .oy-console--left{
-  position: relative;
+  //position: relative;
+  float: left;
   height: 100%;
-  width: 120px;
-  padding: 0 11px 0 12px;
+  width: $nav-left-menu-width;
+  padding: 0 $nav-left-menu-padding_width - 1 0 $nav-left-menu-padding_width;
   border-right: 1px solid #ececec;
   .nav-path{
 
   }
 }
 .oy-console--center{
-  position: fixed;
+  position: absolute;
   left: 144px;
-  top: 60px;
-  width: 100%;
+  right: 0;
+  top: $nav-menu_height;
+  //width: 100%;
   height: 100%;
   overflow: hidden;
   background-color: $gray-bg;
 }
 
 .article{
-  width: 100%;
   height: 100%;
   overflow: hidden;
 }
@@ -68,15 +69,11 @@
 }
 //文章内容
 .article-content{
-  position: absolute;
-  top: 0;
-  left: $article_width;
-  width: 100%;
   height: 100%;
-  //min-height: 460px;
-  overflow: hidden;
-  overflow-y: auto;
-  word-wrap: break-word;
+  overflow: auto;
+  position: fixed;
+  left: $nav-left-menu-width + $article_width + ($nav-left-menu-padding_width * 2);
+  right: 0;
 }
 .article-pos{
   float: left;
