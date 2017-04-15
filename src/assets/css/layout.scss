@@ -12,7 +12,7 @@
   border-radius: 4px;
   .nav-path{
     min-width: 980px;
-    height: 60px;
+    height: $nav-menu_height;
     padding-left: 55px;
     //float: left;
     //设置inline-block 会导致父元素意外增加高度,解决方法是添加vertical-align: bottom 属性,具体方法可以参考笔记
@@ -26,71 +26,54 @@
     line-height: 60px;
   }
 }
+//菜单
+.oy-console--menu{
+  width: 120px;
+  padding: 0 12px;
+}
 //侧边(左边)导航栏(功能导航)
 .oy-console--left{
-  position: relative;
+  //position: relative;
+  float: left;
   height: 100%;
-  padding-left: 120px + 24px;
-  //width: 120px;
-  //padding: 0 12px;
+  width: $nav-left-menu-width;
+  padding: 0 $nav-left-menu-padding_width - 1 0 $nav-left-menu-padding_width;
+  border-right: 1px solid #ececec;
   .nav-path{
 
   }
 }
-.oy-console--menu{
-  width: 120px;
-  padding: 0 12px;
-  position: absolute;
-  left: 0;
-  top: 0;
-}
 .oy-console--center{
-  //position: absolute;
-  //left: 144px;
-  //top: 60px;
+  position: absolute;
+  left: 144px;
+  right: 0;
+  top: $nav-menu_height;
   //width: 100%;
-  //height: 100%;
-  //overflow: hidden;
-  //background-color: $gray-bg;
-  //position: relative;
-
+  height: 100%;
+  overflow: hidden;
+  background-color: $gray-bg;
 }
 
 .article{
-  //padding-left: $article_width;
-  width: 100%;
   height: 100%;
   overflow: hidden;
-  position: relative;
-  top: 0;
-  left: 0;
-  margin: 0;
 }
 //文章列表
 .article-list{
   overflow-y: auto;
   overflow-x: hidden;
   width: $article_width;
-  float: left;
-  //position: absolute;
-  left: 0;
+  position: relative;
   border-right: 1px solid #ececec;
   height: 100%;
 }
 //文章内容
 .article-content{
-  overflow: auto;
   height: 100%;
-  //position: relative;
-  //top: 0;
-  //left: 0;
-  //min-width: 980px;
-  //right: 0;
-  //bottom: 0;
-  //width: 800px;
-  //height: 100%;
-  //overflow: hidden;
-  //overflow-y: auto;
+  overflow: auto;
+  position: fixed;
+  left: $nav-left-menu-width + $article_width + ($nav-left-menu-padding_width * 2);
+  right: 0;
 }
 .article-pos{
   float: left;
