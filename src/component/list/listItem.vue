@@ -47,28 +47,28 @@
 		props: {
 		    selected: {
 		        type: Boolean,
-						default: true
-				},
+				default: true
+			},
 		    index: {
-		        type: String,
-						required: true
-				},
+				type: String,
+				required: true
+			},
 		    title: {
 		        type: String,
-						default: "标题"
-				},
-				content: {
-				    type: String,
-						default: "内容"
-				},
-				lastDate: {
-				    type: String,
-						default: "修改时间",
-				},
-				author: {
-				    type: String,
-						default: "作者"
-				}
+				default: "标题"
+			},
+			content: {
+				type: String,
+				default: "内容"
+			},
+			lastDate: {
+				type: String,
+				default: "修改时间",
+			},
+			author: {
+				type: String,
+				default: "作者"
+			}
 		}
 	}
 </script>
